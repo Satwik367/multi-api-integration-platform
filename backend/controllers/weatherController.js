@@ -1,4 +1,5 @@
 const axios = require("axios");
+const ApiLog = require("../models/ApiLog");
 
 const getWeather = async (req, res) => {
 
@@ -7,10 +8,15 @@ const getWeather = async (req, res) => {
         const { city } = req.query;
 
         if (!city) {
+
             return res.status(400).json({
+
                 success: false,
+
                 message: "City is required"
+
             });
+
         }
 
         const response = await axios.get(
@@ -24,28 +30,80 @@ const getWeather = async (req, res) => {
             }
         );
 
-        const data = response.data;
+        const weather = {
+
+            city: response.data.name,
+            country: response.data.sys.country,
+            temperature: response.data.main.temp,
+            humidity: response.data.main.humidity,
+            feelsLike: response.data.main.feels_like,
+            description: response.data.weather[0].description,
+            windSpeed: response.data.wind.speed
+
+        };
+
+        if (req.user) {
+
+            await ApiLog.create({
+
+                user: req.user._id,
+
+                api: "Weather API",
+
+                status: "SUCCESS",
+
+                request: {
+
+                    city
+
+                },
+
+                response: weather
+
+            });
+
+        }
 
         res.json({
+
             success: true,
-            weather: {
-                city: data.name,
-                country: data.sys.country,
-                temperature: data.main.temp,
-                humidity: data.main.humidity,
-                feelsLike: data.main.feels_like,
-                description: data.weather[0].description,
-                windSpeed: data.wind.speed
-            }
+
+            weather
+
         });
 
-    } catch (err) {
+    }
 
-        console.log(err.response?.data || err.message);
+    catch (err) {
+
+        if (req.user) {
+
+            await ApiLog.create({
+
+                user: req.user._id,
+
+                api: "Weather API",
+
+                status: "FAILED",
+
+                request: req.query,
+
+                response: {
+
+                    error: err.message
+
+                }
+
+            });
+
+        }
 
         res.status(500).json({
+
             success: false,
-            error: err.response?.data || err.message
+
+            message: err.message
+
         });
 
     }
@@ -53,5 +111,7 @@ const getWeather = async (req, res) => {
 };
 
 module.exports = {
+
     getWeather
+
 };
