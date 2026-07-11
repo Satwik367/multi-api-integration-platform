@@ -3,6 +3,7 @@ const cors = require("cors");
 require("dotenv").config();
 
 const authRoutes = require("./routes/authRoutes");
+const weatherRoutes = require("./routes/weatherRoutes");
 
 const app = express();
 
@@ -21,5 +22,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/auth", authRoutes);
+
+app.use("/api/weather", weatherRoutes);
 
 module.exports = app;
