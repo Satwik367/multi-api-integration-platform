@@ -1,45 +1,14 @@
 import {
-    FaHome,
-    FaCloud,
-    FaRobot,
-    FaUser
-} from "react-icons/fa";
 
-import { Link } from "react-router-dom";
+    Link
+
+} from "react-router-dom";
 
 function Sidebar() {
 
-    const menus = [
-
-        {
-            name: "Dashboard",
-            path: "/",
-            icon: <FaHome />
-        },
-
-        {
-            name: "API Marketplace",
-            path: "/marketplace",
-            icon: <FaCloud />
-        },
-
-        {
-            name: "AI Assistant",
-            path: "/ai",
-            icon: <FaRobot />
-        },
-
-        {
-            name: "Profile",
-            path: "/profile",
-            icon: <FaUser />
-        }
-
-    ];
-
     return (
 
-        <div className="w-64 h-screen bg-slate-900 text-white">
+        <div className="w-64 bg-slate-900 text-white min-h-screen">
 
             <div className="text-2xl font-bold p-6">
 
@@ -47,29 +16,33 @@ function Sidebar() {
 
             </div>
 
-            {
+            <nav className="flex flex-col">
 
-                menus.map((item) => (
+                <Link className="p-4 hover:bg-slate-700" to="/">
 
-                    <Link
+                    Dashboard
 
-                        key={item.name}
+                </Link>
 
-                        to={item.path}
+                <Link className="p-4 hover:bg-slate-700" to="/marketplace">
 
-                        className="flex items-center gap-4 px-6 py-4 hover:bg-slate-700"
+                    API Marketplace
 
-                    >
+                </Link>
 
-                        {item.icon}
+                <Link className="p-4 hover:bg-slate-700" to="/workflows">
 
-                        {item.name}
+                    Workflow Builder
 
-                    </Link>
+                </Link>
 
-                ))
+                <Link className="p-4 hover:bg-slate-700" to="/executor/gemini">
 
-            }
+                    Gemini AI
+
+                </Link>
+
+            </nav>
 
         </div>
 
