@@ -1,11 +1,15 @@
 const express = require("express");
 
+const router = express.Router();
+
 const {
     convertCurrency
 } = require("../controllers/currencyController");
 
-const router = express.Router();
+const {
+    protect
+} = require("../middleware/authMiddleware");
 
-router.get("/", convertCurrency);
+router.get("/", protect, convertCurrency);
 
 module.exports = router;

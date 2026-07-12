@@ -1,9 +1,15 @@
 const express = require("express");
 
-const { getNews } = require("../controllers/newsController");
-
 const router = express.Router();
 
-router.get("/", getNews);
+const {
+    getNews
+} = require("../controllers/newsController");
+
+const {
+    protect
+} = require("../middleware/authMiddleware");
+
+router.get("/", protect, getNews);
 
 module.exports = router;

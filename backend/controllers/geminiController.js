@@ -1,14 +1,18 @@
 const { GoogleGenAI } = require("@google/genai");
 
+const createApiLog = require("../utils/createApiLog");
+
 const ai = new GoogleGenAI({
     apiKey: process.env.GEMINI_API_KEY
 });
 
 const chat = async (req, res) => {
 
+    let prompt = "";
+
     try {
 
-        const { prompt } = req.body;
+        prompt = req.body.prompt;
 
         const response = await ai.models.generateContent({
 
@@ -17,6 +21,20 @@ const chat = async (req, res) => {
             contents: prompt
 
         });
+
+        await createApiLog(
+
+            req,
+
+            "Gemini API",
+
+            "SUCCESS",
+
+            { prompt },
+
+            { response: response.text }
+
+        );
 
         res.json({
 
@@ -29,6 +47,20 @@ const chat = async (req, res) => {
     }
 
     catch (err) {
+
+        await createApiLog(
+
+            req,
+
+            "Gemini API",
+
+            "FAILED",
+
+            { prompt },
+
+            { error: err.message }
+
+        );
 
         console.log(err);
 
