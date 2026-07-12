@@ -1,23 +1,34 @@
 const express = require("express");
 
+const router = express.Router();
+
 const {
-
     createWorkflow,
-
-    getWorkflows
-
+    getWorkflows,
+    deleteWorkflow
 } = require("../controllers/workflowController");
 
 const {
+    runWorkflow
+} = require("../controllers/workflowExecutionController");
 
+const {
     protect
-
 } = require("../middleware/authMiddleware");
 
-const router = express.Router();
+// All workflow routes require authentication
+router.use(protect);
 
-router.post("/", protect, createWorkflow);
+// Get all workflows of logged in user
+router.get("/", getWorkflows);
 
-router.get("/", protect, getWorkflows);
+// Create new workflow
+router.post("/", createWorkflow);
+
+// Execute workflow
+router.post("/:id/run", runWorkflow);
+
+// Delete workflow
+router.delete("/:id", deleteWorkflow);
 
 module.exports = router;

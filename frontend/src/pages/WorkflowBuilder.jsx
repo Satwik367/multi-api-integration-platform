@@ -1,32 +1,45 @@
 import { useEffect, useState } from "react";
 
 import {
-
     createWorkflow,
     getWorkflows,
     deleteWorkflow
-
 } from "../services/workflowService";
+
+import {
+    runWorkflow
+} from "../services/workflowExecutionService";
 
 function WorkflowBuilder() {
 
     const [name, setName] = useState("");
-
     const [description, setDescription] = useState("");
 
     const [steps, setSteps] = useState([]);
 
     const [workflows, setWorkflows] = useState([]);
 
+    const [loading, setLoading] = useState(false);
+
+    const [result, setResult] = useState("");
+
     const apiOptions = [
 
         "Weather",
+
         "GitHub",
+
         "News",
-        "Currency",
+
         "Gemini"
 
     ];
+
+    useEffect(() => {
+
+        loadWorkflows();
+
+    }, []);
 
     const loadWorkflows = async () => {
 
@@ -46,12 +59,6 @@ function WorkflowBuilder() {
 
     };
 
-    useEffect(() => {
-
-        loadWorkflows();
-
-    }, []);
-
     const addStep = () => {
 
         setSteps([
@@ -60,7 +67,9 @@ function WorkflowBuilder() {
 
             {
 
-                api: "Weather"
+                api: "Weather",
+
+                config: {}
 
             }
 
@@ -82,10 +91,30 @@ function WorkflowBuilder() {
 
         try {
 
+            if (!name.trim()) {
+
+                alert("Workflow name is required");
+
+                return;
+
+            }
+
+            if (steps.length === 0) {
+
+                alert("Add at least one step");
+
+                return;
+
+            }
+
+            setLoading(true);
+
             await createWorkflow({
 
                 name,
+
                 description,
+
                 steps
 
             });
@@ -96,7 +125,35 @@ function WorkflowBuilder() {
 
             setSteps([]);
 
-            loadWorkflows();
+            await loadWorkflows();
+
+            alert("Workflow Saved");
+
+        }
+
+        catch (err) {
+
+            console.log(err);
+
+            alert("Failed to save workflow");
+
+        }
+
+        finally {
+
+            setLoading(false);
+
+        }
+
+    };
+
+    const removeWorkflow = async (id) => {
+
+        try {
+
+            await deleteWorkflow(id);
+
+            await loadWorkflows();
 
         }
 
@@ -108,29 +165,49 @@ function WorkflowBuilder() {
 
     };
 
-    const removeWorkflow = async (id) => {
+    const executeWorkflow = async (id) => {
 
-        await deleteWorkflow(id);
+        try {
 
-        loadWorkflows();
+            setLoading(true);
+
+            const data = await runWorkflow(id);
+
+            setResult(data.output);
+
+        }
+
+        catch (err) {
+
+            console.log(err);
+
+            alert("Workflow Execution Failed");
+
+        }
+
+        finally {
+
+            setLoading(false);
+
+        }
 
     };
 
     return (
 
-        <div className="p-8">
+        <div className="p-8 bg-slate-100 min-h-screen">
 
-            <h1 className="text-3xl font-bold mb-8">
+            <h1 className="text-4xl font-bold mb-8">
 
                 Workflow Builder
 
             </h1>
 
-            <div className="bg-white shadow rounded-lg p-6">
+            <div className="bg-white rounded-xl shadow-lg p-6">
 
                 <input
 
-                    className="border p-3 rounded w-full mb-4"
+                    className="border rounded-lg p-3 w-full mb-4"
 
                     placeholder="Workflow Name"
 
@@ -142,9 +219,11 @@ function WorkflowBuilder() {
 
                 <textarea
 
-                    className="border p-3 rounded w-full mb-4"
+                    className="border rounded-lg p-3 w-full mb-4"
 
-                    placeholder="Description"
+                    rows="3"
+
+                    placeholder="Workflow Description"
 
                     value={description}
 
@@ -152,53 +231,59 @@ function WorkflowBuilder() {
 
                 />
 
-                {
+                <div className="space-y-3">
 
-                    steps.map((step,index)=>(
+                    {
 
-                        <select
+                        steps.map((step,index)=>(
 
-                            key={index}
+                            <select
 
-                            className="border p-3 rounded w-full mb-3"
+                                key={index}
 
-                            value={step.api}
+                                className="border rounded-lg p-3 w-full"
 
-                            onChange={(e)=>updateStep(index,e.target.value)}
+                                value={step.api}
 
-                        >
+                                onChange={(e)=>updateStep(index,e.target.value)}
 
-                            {
+                            >
 
-                                apiOptions.map((api)=>(
+                                {
 
-                                    <option
+                                    apiOptions.map((api)=>(
 
-                                        key={api}
+                                        <option
 
-                                    >
+                                            key={api}
 
-                                        {api}
+                                            value={api}
 
-                                    </option>
+                                        >
 
-                                ))
+                                            {api}
 
-                            }
+                                        </option>
 
-                        </select>
+                                    ))
 
-                    ))
+                                }
 
-                }
+                            </select>
 
-                <div className="flex gap-4 mt-4">
+                        ))
+
+                    }
+
+                </div>
+
+                <div className="flex gap-4 mt-6">
 
                     <button
 
                         onClick={addStep}
 
-                        className="bg-blue-600 text-white px-6 py-2 rounded"
+                        className="bg-blue-600 text-white px-5 py-3 rounded-lg"
 
                     >
 
@@ -208,13 +293,27 @@ function WorkflowBuilder() {
 
                     <button
 
+                        disabled={loading}
+
                         onClick={saveWorkflow}
 
-                        className="bg-green-600 text-white px-6 py-2 rounded"
+                        className="bg-green-600 text-white px-5 py-3 rounded-lg"
 
                     >
 
-                        Save Workflow
+                        {
+
+                            loading
+
+                            ?
+
+                            "Saving..."
+
+                            :
+
+                            "Save Workflow"
+
+                        }
 
                     </button>
 
@@ -224,7 +323,7 @@ function WorkflowBuilder() {
 
             <div className="mt-10">
 
-                <h2 className="text-2xl font-bold mb-4">
+                <h2 className="text-3xl font-bold mb-5">
 
                     Saved Workflows
 
@@ -232,29 +331,45 @@ function WorkflowBuilder() {
 
                 {
 
+                    workflows.length===0
+
+                    ?
+
+                    (
+
+                        <div className="bg-white rounded-lg shadow p-6">
+
+                            No workflows created yet.
+
+                        </div>
+
+                    )
+
+                    :
+
                     workflows.map((workflow)=>(
 
                         <div
 
                             key={workflow._id}
 
-                            className="bg-white shadow rounded-lg p-6 mb-5"
+                            className="bg-white rounded-xl shadow-lg p-6 mb-6"
 
                         >
 
-                            <h2 className="text-xl font-bold">
+                            <h3 className="text-2xl font-bold">
 
                                 {workflow.name}
 
-                            </h2>
+                            </h3>
 
-                            <p>
+                            <p className="text-gray-600 mt-2">
 
                                 {workflow.description}
 
                             </p>
 
-                            <div className="mt-3">
+                            <div className="flex flex-wrap gap-2 mt-4">
 
                                 {
 
@@ -264,7 +379,7 @@ function WorkflowBuilder() {
 
                                             key={index}
 
-                                            className="bg-blue-100 px-3 py-1 rounded mr-2"
+                                            className="bg-blue-100 text-blue-700 px-4 py-2 rounded-full"
 
                                         >
 
@@ -278,17 +393,33 @@ function WorkflowBuilder() {
 
                             </div>
 
-                            <button
+                            <div className="flex gap-4 mt-6">
 
-                                onClick={()=>removeWorkflow(workflow._id)}
+                                <button
 
-                                className="mt-4 bg-red-600 text-white px-4 py-2 rounded"
+                                    onClick={()=>executeWorkflow(workflow._id)}
 
-                            >
+                                    className="bg-green-600 text-white px-5 py-2 rounded-lg"
 
-                                Delete
+                                >
 
-                            </button>
+                                    Run Workflow
+
+                                </button>
+
+                                <button
+
+                                    onClick={()=>removeWorkflow(workflow._id)}
+
+                                    className="bg-red-600 text-white px-5 py-2 rounded-lg"
+
+                                >
+
+                                    Delete
+
+                                </button>
+
+                            </div>
 
                         </div>
 
@@ -297,6 +428,28 @@ function WorkflowBuilder() {
                 }
 
             </div>
+
+            {
+
+                result &&
+
+                <div className="bg-white rounded-xl shadow-lg p-6 mt-10">
+
+                    <h2 className="text-3xl font-bold mb-4">
+
+                        Workflow Output
+
+                    </h2>
+
+                    <pre className="whitespace-pre-wrap">
+
+                        {result}
+
+                    </pre>
+
+                </div>
+
+            }
 
         </div>
 

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ReactMarkdown from "react-markdown";
 import { askGemini } from "../../services/geminiService";
 
 function GeminiExecutor() {
@@ -45,9 +46,9 @@ function GeminiExecutor() {
 
         <div className="p-8">
 
-            <h1 className="text-3xl font-bold">
+            <h1 className="text-3xl font-bold mb-6">
 
-                Gemini AI
+                Gemini AI Assistant
 
             </h1>
 
@@ -55,9 +56,9 @@ function GeminiExecutor() {
 
                 rows="6"
 
-                className="border p-4 rounded w-full mt-6"
+                className="border rounded-lg w-full p-4"
 
-                placeholder="Ask Gemini..."
+                placeholder="Ask Gemini anything..."
 
                 value={prompt}
 
@@ -67,11 +68,11 @@ function GeminiExecutor() {
 
             <button
 
-                onClick={execute}
+                className="mt-5 bg-purple-600 text-white px-6 py-3 rounded-lg"
 
                 disabled={loading}
 
-                className="bg-purple-600 text-white px-6 py-3 rounded mt-4"
+                onClick={execute}
 
             >
 
@@ -95,9 +96,13 @@ function GeminiExecutor() {
 
                 answer &&
 
-                <div className="bg-white shadow p-6 rounded mt-8">
+                <div className="bg-white mt-8 shadow rounded-xl p-6 prose max-w-none">
 
-                    {answer}
+                    <ReactMarkdown>
+
+                        {answer}
+
+                    </ReactMarkdown>
 
                 </div>
 
