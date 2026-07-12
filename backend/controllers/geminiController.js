@@ -1,5 +1,4 @@
 const { GoogleGenAI } = require("@google/genai");
-
 const createApiLog = require("../utils/createApiLog");
 
 const ai = new GoogleGenAI({
@@ -16,7 +15,8 @@ const chat = async (req, res) => {
 
         const response = await ai.models.generateContent({
 
-            model: "gemini-2.5-flash",
+            // Updated model
+            model: "gemini-2.5-flash-lite",
 
             contents: prompt
 
