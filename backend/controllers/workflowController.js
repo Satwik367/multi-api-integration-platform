@@ -8,6 +8,8 @@ const createWorkflow = async (req, res) => {
 
             name,
 
+            description,
+
             steps
 
         } = req.body;
@@ -15,6 +17,8 @@ const createWorkflow = async (req, res) => {
         const workflow = await Workflow.create({
 
             name,
+
+            description,
 
             steps,
 
@@ -48,19 +52,85 @@ const createWorkflow = async (req, res) => {
 
 const getWorkflows = async (req, res) => {
 
-    const workflows = await Workflow.find({
+    try {
 
-        user: req.user._id
+        const workflows = await Workflow.find({
 
-    });
+            user: req.user._id
 
-    res.json({
+        });
 
-        success: true,
+        res.json({
 
-        workflows
+            success: true,
 
-    });
+            workflows
+
+        });
+
+    }
+
+    catch (err) {
+
+        res.status(500).json({
+
+            success: false,
+
+            message: err.message
+
+        });
+
+    }
+
+};
+
+const deleteWorkflow = async (req, res) => {
+
+    try {
+
+        const workflow = await Workflow.findOne({
+
+            _id: req.params.id,
+
+            user: req.user._id
+
+        });
+
+        if (!workflow) {
+
+            return res.status(404).json({
+
+                success: false,
+
+                message: "Workflow not found"
+
+            });
+
+        }
+
+        await Workflow.findByIdAndDelete(req.params.id);
+
+        res.json({
+
+            success: true,
+
+            message: "Workflow deleted successfully"
+
+        });
+
+    }
+
+    catch (err) {
+
+        res.status(500).json({
+
+            success: false,
+
+            message: err.message
+
+        });
+
+    }
 
 };
 
@@ -68,6 +138,8 @@ module.exports = {
 
     createWorkflow,
 
-    getWorkflows
+    getWorkflows,
+
+    deleteWorkflow
 
 };
