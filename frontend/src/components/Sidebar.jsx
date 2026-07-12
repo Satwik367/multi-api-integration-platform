@@ -15,7 +15,7 @@ function Sidebar() {
 
         {
             name: "Dashboard",
-            path: "/",
+            path: "/dashboard",
             icon: <FaChartPie />
         },
 
