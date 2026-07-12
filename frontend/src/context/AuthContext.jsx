@@ -1,13 +1,4 @@
-import {
-    createContext,
-    useContext,
-    useEffect,
-    useState
-} from "react";
-
-import {
-    getProfile
-} from "../services/authService";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext();
 
@@ -19,37 +10,15 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
 
-        const loadUser = async () => {
+        const storedUser = localStorage.getItem("user");
 
-            try {
+        if (storedUser) {
 
-                const data = await getProfile();
+            setUser(JSON.parse(storedUser));
 
-                setUser(data.user);
+        }
 
-            }
-
-            catch {
-
-                localStorage.removeItem("token");
-
-            }
-
-            finally {
-
-                setLoading(false);
-
-            }
-
-        };
-
-        if (localStorage.getItem("token"))
-
-            loadUser();
-
-        else
-
-            setLoading(false);
+        setLoading(false);
 
     }, []);
 
@@ -77,4 +46,8 @@ export const AuthProvider = ({ children }) => {
 
 };
 
-export const useAuth = () => useContext(AuthContext);
+export const useAuth = () => {
+
+    return useContext(AuthContext);
+
+};

@@ -1,4 +1,22 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
+import {
+    FaCloudSun,
+    FaGithub,
+    FaRobot,
+    FaNewspaper,
+    FaExchangeAlt,
+    FaProjectDiagram
+} from "react-icons/fa";
+
+import {
+    PieChart,
+    Pie,
+    Cell,
+    Tooltip,
+    ResponsiveContainer
+} from "recharts";
 
 import { getDashboard } from "../services/dashboardService";
 
@@ -34,7 +52,7 @@ function Dashboard() {
 
         return (
 
-            <div className="p-8 text-xl">
+            <div className="p-8">
 
                 Loading Dashboard...
 
@@ -44,85 +62,255 @@ function Dashboard() {
 
     }
 
+    const chartData = [
+
+        {
+
+            name: "Success",
+
+            value: analytics.successfulCalls
+
+        },
+
+        {
+
+            name: "Failed",
+
+            value: analytics.failedCalls
+
+        }
+
+    ];
+
+    const COLORS = [
+
+        "#22c55e",
+
+        "#ef4444"
+
+    ];
+
     return (
 
-        <div className="p-8 bg-slate-100 min-h-screen">
+        <div className="space-y-8">
 
-            <h1 className="text-4xl font-bold mb-8">
+            <div>
 
-                Dashboard
+                <h1 className="text-4xl font-bold">
 
-            </h1>
+                    Dashboard
 
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                </h1>
 
-                <div className="bg-white shadow rounded-xl p-6">
+                <p className="text-gray-500 mt-2">
 
-                    <h2 className="text-gray-500">
+                    Welcome back to APIFlow AI
+
+                </p>
+
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+
+                <div className="bg-white rounded-xl shadow p-6">
+
+                    <p className="text-gray-500">
 
                         Total API Calls
 
-                    </h2>
+                    </p>
 
-                    <p className="text-4xl font-bold mt-4">
+                    <h2 className="text-4xl font-bold mt-3">
 
                         {analytics.totalCalls}
 
-                    </p>
+                    </h2>
 
                 </div>
 
-                <div className="bg-white shadow rounded-xl p-6">
+                <div className="bg-white rounded-xl shadow p-6">
 
-                    <h2 className="text-gray-500">
+                    <p className="text-gray-500">
 
                         Successful Calls
 
-                    </h2>
+                    </p>
 
-                    <p className="text-4xl font-bold mt-4 text-green-600">
+                    <h2 className="text-4xl font-bold text-green-600 mt-3">
 
                         {analytics.successfulCalls}
 
-                    </p>
+                    </h2>
 
                 </div>
 
-                <div className="bg-white shadow rounded-xl p-6">
+                <div className="bg-white rounded-xl shadow p-6">
 
-                    <h2 className="text-gray-500">
+                    <p className="text-gray-500">
 
                         Failed Calls
 
-                    </h2>
+                    </p>
 
-                    <p className="text-4xl font-bold mt-4 text-red-600">
+                    <h2 className="text-4xl font-bold text-red-600 mt-3">
 
                         {analytics.failedCalls}
 
-                    </p>
+                    </h2>
 
                 </div>
 
-                <div className="bg-white shadow rounded-xl p-6">
+                <div className="bg-white rounded-xl shadow p-6">
 
-                    <h2 className="text-gray-500">
+                    <p className="text-gray-500">
 
                         Workflows
 
-                    </h2>
+                    </p>
 
-                    <p className="text-4xl font-bold mt-4 text-blue-600">
+                    <h2 className="text-4xl font-bold text-blue-600 mt-3">
 
                         {analytics.workflows}
 
-                    </p>
+                    </h2>
 
                 </div>
 
             </div>
 
-            <div className="bg-white rounded-xl shadow mt-10 p-6">
+            <div className="grid lg:grid-cols-2 gap-8">
+
+                <div className="bg-white rounded-xl shadow p-6">
+
+                    <h2 className="text-2xl font-bold mb-6">
+
+                        Success vs Failed
+
+                    </h2>
+
+                    <ResponsiveContainer
+                        width="100%"
+                        height={300}
+                    >
+
+                        <PieChart>
+
+                            <Pie
+                                data={chartData}
+                                dataKey="value"
+                                outerRadius={100}
+                                label
+                            >
+
+                                {
+
+                                    chartData.map((entry,index)=>(
+
+                                        <Cell
+
+                                            key={index}
+
+                                            fill={COLORS[index]}
+
+                                        />
+
+                                    ))
+
+                                }
+
+                            </Pie>
+
+                            <Tooltip />
+
+                        </PieChart>
+
+                    </ResponsiveContainer>
+
+                </div>
+
+                <div className="bg-white rounded-xl shadow p-6">
+
+                    <h2 className="text-2xl font-bold mb-6">
+
+                        Quick Actions
+
+                    </h2>
+
+                    <div className="grid grid-cols-2 gap-4">
+
+                        <Link
+                            to="/executor/weather"
+                            className="bg-yellow-100 rounded-lg p-5 text-center hover:shadow-lg"
+                        >
+
+                            <FaCloudSun className="text-4xl mx-auto mb-3 text-yellow-500" />
+
+                            Weather
+
+                        </Link>
+
+                        <Link
+                            to="/executor/github"
+                            className="bg-gray-100 rounded-lg p-5 text-center hover:shadow-lg"
+                        >
+
+                            <FaGithub className="text-4xl mx-auto mb-3" />
+
+                            GitHub
+
+                        </Link>
+
+                        <Link
+                            to="/executor/news"
+                            className="bg-red-100 rounded-lg p-5 text-center hover:shadow-lg"
+                        >
+
+                            <FaNewspaper className="text-4xl mx-auto mb-3 text-red-500" />
+
+                            News
+
+                        </Link>
+
+                        <Link
+                            to="/executor/currency"
+                            className="bg-green-100 rounded-lg p-5 text-center hover:shadow-lg"
+                        >
+
+                            <FaExchangeAlt className="text-4xl mx-auto mb-3 text-green-600" />
+
+                            Currency
+
+                        </Link>
+
+                        <Link
+                            to="/executor/gemini"
+                            className="bg-purple-100 rounded-lg p-5 text-center hover:shadow-lg"
+                        >
+
+                            <FaRobot className="text-4xl mx-auto mb-3 text-purple-600" />
+
+                            Gemini
+
+                        </Link>
+
+                        <Link
+                            to="/workflows"
+                            className="bg-blue-100 rounded-lg p-5 text-center hover:shadow-lg"
+                        >
+
+                            <FaProjectDiagram className="text-4xl mx-auto mb-3 text-blue-600" />
+
+                            Workflows
+
+                        </Link>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div className="bg-white rounded-xl shadow p-6">
 
                 <h2 className="text-2xl font-bold mb-6">
 
@@ -132,123 +320,77 @@ function Dashboard() {
 
                 {
 
-                    analytics.recentActivity.length === 0 ? (
+                    analytics.recentActivity.length === 0
+
+                    ?
+
+                    (
 
                         <p>
 
-                            No API Requests Yet
+                            No activity yet.
 
                         </p>
 
-                    ) : (
+                    )
 
-                        analytics.recentActivity.map((log)=>(
+                    :
 
-                            <div
+                    analytics.recentActivity.map((log)=>(
 
-                                key={log._id}
+                        <div
 
-                                className="flex justify-between border-b py-4"
+                            key={log._id}
 
-                            >
+                            className="flex justify-between border-b py-4"
 
-                                <div>
+                        >
 
-                                    <h3 className="font-bold">
+                            <div>
 
-                                        {log.api}
+                                <h3 className="font-semibold">
 
-                                    </h3>
+                                    {log.api}
 
-                                    <p className="text-gray-500">
+                                </h3>
 
-                                        {
+                                <p className="text-sm text-gray-500">
 
-                                            new Date(
+                                    {
 
-                                                log.createdAt
+                                        new Date(
 
-                                            ).toLocaleString()
+                                            log.createdAt
 
-                                        }
+                                        ).toLocaleString()
 
-                                    </p>
+                                    }
 
-                                </div>
-
-                                <span
-
-                                    className={`font-bold ${
-
-                                        log.status==="SUCCESS"
-
-                                        ?
-
-                                        "text-green-600"
-
-                                        :
-
-                                        "text-red-600"
-
-                                    }`}
-
-                                >
-
-                                    {log.status}
-
-                                </span>
+                                </p>
 
                             </div>
 
-                        ))
+                            <span
 
-                    )
+                                className={`font-bold ${
+                                    log.status==="SUCCESS"
+                                    ?
+                                    "text-green-600"
+                                    :
+                                    "text-red-600"
+                                }`}
+
+                            >
+
+                                {log.status}
+
+                            </span>
+
+                        </div>
+
+                    ))
 
                 }
-
-            </div>
-
-            <div className="bg-white rounded-xl shadow mt-10 p-6">
-
-                <h2 className="text-2xl font-bold mb-6">
-
-                    Connected APIs
-
-                </h2>
-
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-
-                    <div className="border rounded-lg p-4 text-center">
-
-                        🌤 Weather API
-
-                    </div>
-
-                    <div className="border rounded-lg p-4 text-center">
-
-                        🐙 GitHub API
-
-                    </div>
-
-                    <div className="border rounded-lg p-4 text-center">
-
-                        📰 News API
-
-                    </div>
-
-                    <div className="border rounded-lg p-4 text-center">
-
-                        💱 Currency API
-
-                    </div>
-
-                    <div className="border rounded-lg p-4 text-center">
-
-                        🤖 Gemini AI
-
-                    </div>
-
-                </div>
 
             </div>
 

@@ -1,54 +1,68 @@
 import { useState } from "react";
-
 import { Link, useNavigate } from "react-router-dom";
 
-import toast from "react-hot-toast";
-
 import { registerUser } from "../services/authService";
+import { useAuth } from "../context/AuthContext";
 
 function Register() {
 
     const navigate = useNavigate();
 
-    const [form, setForm] = useState({
+    const { setUser } = useAuth();
 
-        name: "",
+    const [name, setName] = useState("");
 
-        email: "",
+    const [email, setEmail] = useState("");
 
-        password: ""
+    const [password, setPassword] = useState("");
 
-    });
+    const [loading, setLoading] = useState(false);
 
-    const handleChange = (e) => {
-
-        setForm({
-
-            ...form,
-
-            [e.target.name]: e.target.value
-
-        });
-
-    };
-
-    const handleSubmit = async (e) => {
+    const submitHandler = async (e) => {
 
         e.preventDefault();
 
         try {
 
-            await registerUser(form);
+            setLoading(true);
 
-            toast.success("Registration Successful");
+            const data = await registerUser({
 
-            navigate("/login");
+                name,
+
+                email,
+
+                password
+
+            });
+
+            localStorage.setItem(
+
+                "token",
+
+                data.token
+
+            );
+
+            localStorage.setItem(
+
+                "user",
+
+                JSON.stringify(data.user)
+
+            );
+
+            setUser(data.user);
+
+            navigate("/dashboard");
 
         }
 
         catch (err) {
 
-            toast.error(
+            console.log(err);
+
+            alert(
 
                 err.response?.data?.message ||
 
@@ -58,83 +72,113 @@ function Register() {
 
         }
 
+        finally {
+
+            setLoading(false);
+
+        }
+
     };
 
     return (
 
-        <div className="min-h-screen flex items-center justify-center bg-slate-100">
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 via-slate-100 to-indigo-100">
 
-            <form
+            <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-10">
 
-                onSubmit={handleSubmit}
+                <div className="text-center mb-8">
 
-                className="bg-white p-8 rounded-xl shadow-lg w-[400px]"
+                    <h1 className="text-4xl font-bold">
 
-            >
+                        APIFlow AI
 
-                <h1 className="text-3xl font-bold mb-6 text-center">
+                    </h1>
 
-                    Register
+                    <p className="text-gray-500 mt-2">
 
-                </h1>
+                        Create your account
 
-                <input
+                    </p>
 
-                    name="name"
+                </div>
 
-                    placeholder="Name"
+                <form onSubmit={submitHandler}>
 
-                    className="w-full border p-3 rounded mb-4"
+                    <input
 
-                    onChange={handleChange}
+                        className="border rounded-lg p-3 w-full mb-5"
 
-                />
+                        placeholder="Full Name"
 
-                <input
+                        value={name}
 
-                    name="email"
+                        onChange={(e)=>setName(e.target.value)}
 
-                    placeholder="Email"
+                    />
 
-                    className="w-full border p-3 rounded mb-4"
+                    <input
 
-                    onChange={handleChange}
+                        className="border rounded-lg p-3 w-full mb-5"
 
-                />
+                        type="email"
 
-                <input
+                        placeholder="Email"
 
-                    type="password"
+                        value={email}
 
-                    name="password"
+                        onChange={(e)=>setEmail(e.target.value)}
 
-                    placeholder="Password"
+                    />
 
-                    className="w-full border p-3 rounded mb-4"
+                    <input
 
-                    onChange={handleChange}
+                        className="border rounded-lg p-3 w-full mb-6"
 
-                />
+                        type="password"
 
-                <button
+                        placeholder="Password"
 
-                    className="w-full bg-green-600 text-white p-3 rounded"
+                        value={password}
 
-                >
+                        onChange={(e)=>setPassword(e.target.value)}
 
-                    Register
+                    />
 
-                </button>
+                    <button
 
-                <p className="mt-4 text-center">
+                        disabled={loading}
+
+                        className="bg-blue-600 hover:bg-blue-700 transition text-white w-full py-3 rounded-lg"
+
+                    >
+
+                        {
+
+                            loading
+
+                            ?
+
+                            "Creating Account..."
+
+                            :
+
+                            "Register"
+
+                        }
+
+                    </button>
+
+                </form>
+
+                <p className="text-center mt-6">
 
                     Already have an account?
 
                     <Link
 
-                        className="text-blue-600 ml-2"
-
                         to="/login"
+
+                        className="text-blue-600 ml-2"
 
                     >
 
@@ -144,7 +188,7 @@ function Register() {
 
                 </p>
 
-            </form>
+            </div>
 
         </div>
 

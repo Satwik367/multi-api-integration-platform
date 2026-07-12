@@ -1,16 +1,28 @@
 import api from "./api";
 
-export const registerUser = async (data) => {
+export const loginUser = async (userData) => {
 
-    const response = await api.post("/auth/register", data);
+    const response = await api.post(
+
+        "/auth/login",
+
+        userData
+
+    );
 
     return response.data;
 
 };
 
-export const loginUser = async (data) => {
+export const registerUser = async (userData) => {
 
-    const response = await api.post("/auth/login", data);
+    const response = await api.post(
+
+        "/auth/register",
+
+        userData
+
+    );
 
     return response.data;
 
@@ -18,7 +30,11 @@ export const loginUser = async (data) => {
 
 export const getProfile = async () => {
 
-    const response = await api.get("/auth/me");
+    const response = await api.get(
+
+        "/users/profile"
+
+    );
 
     return response.data;
 

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import toast from "react-hot-toast";
 
 import { loginUser } from "../services/authService";
 import { useAuth } from "../context/AuthContext";
@@ -11,47 +10,55 @@ function Login() {
 
     const { setUser } = useAuth();
 
-    const [form, setForm] = useState({
+    const [email, setEmail] = useState("");
 
-        email: "",
+    const [password, setPassword] = useState("");
 
-        password: ""
+    const [loading, setLoading] = useState(false);
 
-    });
-
-    const handleChange = (e) => {
-
-        setForm({
-
-            ...form,
-
-            [e.target.name]: e.target.value
-
-        });
-
-    };
-
-    const handleSubmit = async (e) => {
+    const submitHandler = async (e) => {
 
         e.preventDefault();
 
         try {
 
-            const data = await loginUser(form);
+            setLoading(true);
 
-            localStorage.setItem("token", data.token);
+            const data = await loginUser({
+
+                email,
+
+                password
+
+            });
+
+            localStorage.setItem(
+
+                "token",
+
+                data.token
+
+            );
+
+            localStorage.setItem(
+
+                "user",
+
+                JSON.stringify(data.user)
+
+            );
 
             setUser(data.user);
 
-            toast.success("Login Successful");
-
-            navigate("/");
+            navigate("/dashboard");
 
         }
 
         catch (err) {
 
-            toast.error(
+            console.log(err);
+
+            alert(
 
                 err.response?.data?.message ||
 
@@ -61,73 +68,93 @@ function Login() {
 
         }
 
+        finally {
+
+            setLoading(false);
+
+        }
+
     };
 
     return (
 
         <div className="min-h-screen flex items-center justify-center bg-slate-100">
 
-            <form
+            <div className="bg-white rounded-xl shadow-xl w-full max-w-md p-8">
 
-                onSubmit={handleSubmit}
-
-                className="bg-white p-8 rounded-xl shadow-lg w-[400px]"
-
-            >
-
-                <h1 className="text-3xl font-bold mb-6 text-center">
+                <h1 className="text-4xl font-bold text-center mb-8">
 
                     Login
 
                 </h1>
 
-                <input
+                <form onSubmit={submitHandler}>
 
-                    type="email"
+                    <input
 
-                    name="email"
+                        className="border rounded-lg p-3 w-full mb-5"
 
-                    placeholder="Email"
+                        placeholder="Email"
 
-                    className="w-full border p-3 rounded mb-4"
+                        type="email"
 
-                    onChange={handleChange}
+                        value={email}
 
-                />
+                        onChange={(e)=>setEmail(e.target.value)}
 
-                <input
+                    />
 
-                    type="password"
+                    <input
 
-                    name="password"
+                        className="border rounded-lg p-3 w-full mb-6"
 
-                    placeholder="Password"
+                        placeholder="Password"
 
-                    className="w-full border p-3 rounded mb-4"
+                        type="password"
 
-                    onChange={handleChange}
+                        value={password}
 
-                />
+                        onChange={(e)=>setPassword(e.target.value)}
 
-                <button
+                    />
 
-                    className="w-full bg-blue-600 text-white p-3 rounded"
+                    <button
 
-                >
+                        type="submit"
 
-                    Login
+                        disabled={loading}
 
-                </button>
+                        className="bg-blue-600 hover:bg-blue-700 text-white w-full py-3 rounded-lg"
 
-                <p className="mt-4 text-center">
+                    >
+
+                        {
+
+                            loading
+
+                            ?
+
+                            "Logging In..."
+
+                            :
+
+                            "Login"
+
+                        }
+
+                    </button>
+
+                </form>
+
+                <p className="text-center mt-6">
 
                     Don't have an account?
 
                     <Link
 
-                        className="text-blue-600 ml-2"
-
                         to="/register"
+
+                        className="text-blue-600 ml-2"
 
                     >
 
@@ -137,7 +164,7 @@ function Login() {
 
                 </p>
 
-            </form>
+            </div>
 
         </div>
 

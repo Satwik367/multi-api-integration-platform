@@ -1,11 +1,13 @@
-import { Routes, Route } from "react-router-dom";
-import Logs from "./pages/Logs";
+import { Routes, Route, Navigate } from "react-router-dom";
 
-import Dashboard from "./pages/Dashboard";
+import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Dashboard from "./pages/Dashboard";
 import APIMarketplace from "./pages/APIMarketplace";
 import WorkflowBuilder from "./pages/WorkflowBuilder";
+import Logs from "./pages/Logs";
+import Profile from "./pages/Profile";
 
 import WeatherExecutor from "./pages/executor/WeatherExecutor";
 import GithubExecutor from "./pages/executor/GithubExecutor";
@@ -22,68 +24,240 @@ function App() {
 
         <Routes>
 
-            <Route path="/login" element={<Login />} />
+            {/* Public Routes */}
 
-            <Route path="/register" element={<Register />} />
+            <Route
 
-            <Route path="/"
+                path="/"
+
+                element={<Home />}
+
+            />
+
+            <Route
+
+                path="/login"
+
+                element={<Login />}
+
+            />
+
+            <Route
+
+                path="/register"
+
+                element={<Register />}
+
+            />
+
+            {/* Protected Routes */}
+
+            <Route
+
+                path="/dashboard"
+
                 element={
+
                     <ProtectedRoute>
+
                         <MainLayout>
+
                             <Dashboard />
+
                         </MainLayout>
+
                     </ProtectedRoute>
+
                 }
+
             />
 
-            <Route path="/marketplace"
+            <Route
+
+                path="/marketplace"
+
                 element={
+
                     <ProtectedRoute>
+
                         <MainLayout>
+
                             <APIMarketplace />
+
                         </MainLayout>
+
                     </ProtectedRoute>
+
                 }
+
             />
 
-            <Route path="/workflows"
+            <Route
+
+                path="/workflows"
+
                 element={
+
                     <ProtectedRoute>
+
                         <MainLayout>
+
                             <WorkflowBuilder />
+
                         </MainLayout>
+
                     </ProtectedRoute>
+
                 }
+
             />
 
-            <Route path = "/logs"
+            <Route
+
+                path="/logs"
+
                 element={
+
                     <ProtectedRoute>
-                    <MainLayout>
-                        <Logs />
-                    </MainLayout>
+
+                        <MainLayout>
+
+                            <Logs />
+
+                        </MainLayout>
+
                     </ProtectedRoute>
+
                 }
+
             />
 
-            <Route path="/executor/weather"
-                element={<ProtectedRoute><MainLayout><WeatherExecutor /></MainLayout></ProtectedRoute>}
+            <Route
+
+                path="/profile"
+
+                element={
+
+                    <ProtectedRoute>
+
+                        <MainLayout>
+
+                            <Profile />
+
+                        </MainLayout>
+
+                    </ProtectedRoute>
+
+                }
+
             />
 
-            <Route path="/executor/github"
-                element={<ProtectedRoute><MainLayout><GithubExecutor /></MainLayout></ProtectedRoute>}
+            <Route
+
+                path="/executor/weather"
+
+                element={
+
+                    <ProtectedRoute>
+
+                        <MainLayout>
+
+                            <WeatherExecutor />
+
+                        </MainLayout>
+
+                    </ProtectedRoute>
+
+                }
+
             />
 
-            <Route path="/executor/news"
-                element={<ProtectedRoute><MainLayout><NewsExecutor /></MainLayout></ProtectedRoute>}
+            <Route
+
+                path="/executor/github"
+
+                element={
+
+                    <ProtectedRoute>
+
+                        <MainLayout>
+
+                            <GithubExecutor />
+
+                        </MainLayout>
+
+                    </ProtectedRoute>
+
+                }
+
             />
 
-            <Route path="/executor/currency"
-                element={<ProtectedRoute><MainLayout><CurrencyExecutor /></MainLayout></ProtectedRoute>}
+            <Route
+
+                path="/executor/news"
+
+                element={
+
+                    <ProtectedRoute>
+
+                        <MainLayout>
+
+                            <NewsExecutor />
+
+                        </MainLayout>
+
+                    </ProtectedRoute>
+
+                }
+
             />
 
-            <Route path="/executor/gemini"
-                element={<ProtectedRoute><MainLayout><GeminiExecutor /></MainLayout></ProtectedRoute>}
+            <Route
+
+                path="/executor/currency"
+
+                element={
+
+                    <ProtectedRoute>
+
+                        <MainLayout>
+
+                            <CurrencyExecutor />
+
+                        </MainLayout>
+
+                    </ProtectedRoute>
+
+                }
+
+            />
+
+            <Route
+
+                path="/executor/gemini"
+
+                element={
+
+                    <ProtectedRoute>
+
+                        <MainLayout>
+
+                            <GeminiExecutor />
+
+                        </MainLayout>
+
+                    </ProtectedRoute>
+
+                }
+
+            />
+
+            <Route
+
+                path="*"
+
+                element={<Navigate to="/" />}
+
             />
 
         </Routes>

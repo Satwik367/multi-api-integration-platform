@@ -1,19 +1,23 @@
-import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
+import Navbar from "../components/Navbar";
 
 function MainLayout({ children }) {
 
     return (
 
-        <div className="flex">
+        <div className="flex min-h-screen bg-slate-100">
 
             <Sidebar />
 
-            <div className="flex-1">
+            <div className="flex-1 flex flex-col">
 
                 <Navbar />
 
-                {children}
+                <main className="flex-1 p-8 overflow-y-auto">
+
+                    {children}
+
+                </main>
 
             </div>
 
