@@ -16,8 +16,7 @@ const chat = async (req, res) => {
         const response = await ai.models.generateContent({
 
             // Updated model
-            model: "gemini-2.5-flash-lite",
-
+            model: "gemini-flash-latest",
             contents: prompt
 
         });
