@@ -4,7 +4,7 @@ import {
   Play,
   CloudSun,
   BrainCircuit,
-  Github,
+  GitBranch,
   Newspaper,
   BarChart3,
 } from "lucide-react";
@@ -23,7 +23,7 @@ const workflow = [
     color: "text-violet-400",
   },
   {
-    icon: Github,
+    icon: GitBranch,
     title: "GitHub",
     color: "text-white",
   },
@@ -41,15 +41,13 @@ const workflow = [
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden pt-36 pb-24">
-
-      {/* Background Glow */}
+    <section className="relative overflow-hidden bg-[#09090B] pt-36 pb-24">
 
       <div className="absolute left-1/2 top-20 h-96 w-96 -translate-x-1/2 rounded-full bg-indigo-600/20 blur-[140px]" />
 
       <div className="relative mx-auto flex max-w-[1440px] flex-col items-center gap-20 px-6 lg:flex-row lg:px-10">
 
-        {/* Left */}
+        {/* Left Side */}
 
         <motion.div
           initial={{ opacity: 0, x: -40 }}
@@ -91,7 +89,7 @@ function Hero() {
 
           </div>
 
-          <div className="mt-12 flex flex-wrap items-center gap-8 text-sm text-slate-400">
+          <div className="mt-12 flex flex-wrap gap-8 text-sm text-slate-400">
 
             <span>⚡ Fast API Integrations</span>
 
@@ -103,7 +101,7 @@ function Hero() {
 
         </motion.div>
 
-        {/* Right */}
+        {/* Right Side */}
 
         <motion.div
           initial={{ opacity: 0, x: 40 }}

@@ -1,7 +1,7 @@
 import Navbar from "../components/landing/Navbar";
 import Hero from "../components/landing/Hero";
 
-// These will be created next
+// These components will be added next
 // import Integrations from "../components/landing/Integrations";
 // import WhyChooseUs from "../components/landing/WhyChooseUs";
 // import WorkflowPreview from "../components/landing/WorkflowPreview";
@@ -11,22 +11,16 @@ import Hero from "../components/landing/Hero";
 
 function Home() {
   return (
-    <main className="min-h-screen bg-[#09090B] text-white overflow-x-hidden">
+    <main className="min-h-screen overflow-x-hidden bg-[#09090B] text-white">
       <Navbar />
-
       <Hero />
 
       {/*
       <Integrations />
-
       <WhyChooseUs />
-
       <WorkflowPreview />
-
       <DashboardPreview />
-
       <CTA />
-
       <Footer />
       */}
     </main>
