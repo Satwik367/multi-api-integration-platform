@@ -1,22 +1,35 @@
-import Navbar from "../components/home/Navbar";
-import HeroSection from "../components/home/HeroSection";
-import FeaturesSection from "../components/home/FeaturesSection";
-import HowItWorks from "../components/home/HowItWorks";
-import APIShowcase from "../components/home/APIShowcase";
-import CTASection from "../components/home/CTASection";
-import Footer from "../components/home/Footer";
+import Navbar from "../components/landing/Navbar";
+import Hero from "../components/landing/Hero";
+
+// These will be created next
+// import Integrations from "../components/landing/Integrations";
+// import WhyChooseUs from "../components/landing/WhyChooseUs";
+// import WorkflowPreview from "../components/landing/WorkflowPreview";
+// import DashboardPreview from "../components/landing/DashboardPreview";
+// import CTA from "../components/landing/CTA";
+// import Footer from "../components/landing/Footer";
 
 function Home() {
   return (
-    <div className="bg-slate-950 text-white">
+    <main className="min-h-screen bg-[#09090B] text-white overflow-x-hidden">
       <Navbar />
-      <HeroSection />
-      <FeaturesSection />
-      <HowItWorks />
-      <APIShowcase />
-      <CTASection />
+
+      <Hero />
+
+      {/*
+      <Integrations />
+
+      <WhyChooseUs />
+
+      <WorkflowPreview />
+
+      <DashboardPreview />
+
+      <CTA />
+
       <Footer />
-    </div>
+      */}
+    </main>
   );
 }
 

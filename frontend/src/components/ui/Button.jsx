@@ -1,66 +1,42 @@
 import { motion } from "framer-motion";
+import { cn } from "../../lib/cn";
+
+const variants = {
+  primary:
+    "bg-indigo-600 hover:bg-indigo-500 text-white",
+
+  secondary:
+    "border border-white/10 bg-zinc-900 hover:bg-zinc-800 text-white",
+
+  success:
+    "bg-green-600 hover:bg-green-500 text-white",
+
+  danger:
+    "bg-red-600 hover:bg-red-500 text-white",
+};
 
 function Button({
   children,
-  type = "button",
-  onClick,
-  loading = false,
-  disabled = false,
+  className,
   variant = "primary",
-  className = "",
+  ...props
 }) {
-  const variants = {
-    primary:
-      "bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:shadow-indigo-500/40",
-
-    secondary:
-      "bg-slate-800 border border-slate-700 text-white hover:bg-slate-700",
-
-    danger:
-      "bg-red-600 hover:bg-red-700 text-white",
-
-    success:
-      "bg-green-600 hover:bg-green-700 text-white",
-  };
-
   return (
     <motion.button
       whileHover={{
-        scale: loading || disabled ? 1 : 1.02,
+        scale: 1.03,
       }}
       whileTap={{
-        scale: loading || disabled ? 1 : 0.98,
+        scale: 0.98,
       }}
-      transition={{
-        duration: 0.15,
-      }}
-      type={type}
-      onClick={onClick}
-      disabled={loading || disabled}
-      className={`
-        relative
-        w-full
-        overflow-hidden
-        rounded-xl
-        py-3.5
-        font-semibold
-        transition-all
-        duration-300
-        disabled:cursor-not-allowed
-        disabled:opacity-60
-        shadow-lg
-        ${variants[variant]}
-        ${className}
-      `}
-    >
-      {loading ? (
-        <div className="flex items-center justify-center gap-3">
-          <div className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
-          <span>Please wait...</span>
-        </div>
-      ) : (
-        children
+      className={cn(
+        "inline-flex items-center justify-center rounded-xl px-6 py-3 font-semibold transition",
+        variants[variant],
+        className
       )}
+      {...props}
+    >
+      {children}
     </motion.button>
   );
 }
