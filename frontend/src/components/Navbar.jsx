@@ -1,5 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import { FaUserCircle, FaSignOutAlt } from "react-icons/fa";
+
+import {
+    FaUserCircle,
+    FaSignOutAlt,
+    FaBell
+} from "react-icons/fa";
 
 import { useAuth } from "../context/AuthContext";
 
@@ -21,19 +26,19 @@ function Navbar() {
 
     return (
 
-        <header className="h-16 bg-white shadow-md border-b flex items-center justify-between px-8">
+        <header className="sticky top-0 z-50 flex h-20 items-center justify-between border-b border-white/10 bg-slate-900/50 px-8 backdrop-blur-xl">
 
             <div>
 
-                <h1 className="text-2xl font-bold text-slate-800">
+                <h1 className="text-3xl font-bold text-white">
 
-                    APIFlow AI
+                    Welcome Back 👋
 
                 </h1>
 
-                <p className="text-sm text-gray-500">
+                <p className="mt-1 text-slate-400">
 
-                    Multi API Integration Platform
+                    Manage your APIs from one intelligent dashboard.
 
                 </p>
 
@@ -41,23 +46,33 @@ function Navbar() {
 
             <div className="flex items-center gap-6">
 
-                <div className="flex items-center gap-3">
+                <button
+
+                    className="rounded-full bg-slate-800 p-3 text-slate-300 transition hover:bg-slate-700 hover:text-white"
+
+                >
+
+                    <FaBell />
+
+                </button>
+
+                <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-slate-800/60 px-4 py-2">
 
                     <FaUserCircle
 
-                        className="text-4xl text-blue-600"
+                        className="text-5xl text-indigo-400"
 
                     />
 
                     <div>
 
-                        <p className="font-semibold">
+                        <p className="font-semibold text-white">
 
                             {user?.name || "User"}
 
                         </p>
 
-                        <p className="text-sm text-gray-500">
+                        <p className="text-sm text-slate-400">
 
                             {user?.email}
 
@@ -71,7 +86,7 @@ function Navbar() {
 
                     onClick={logout}
 
-                    className="flex items-center gap-2 bg-red-500 hover:bg-red-600 transition text-white px-5 py-2 rounded-lg"
+                    className="flex items-center gap-2 rounded-xl bg-gradient-to-r from-red-500 to-rose-600 px-5 py-3 font-medium text-white shadow-lg transition duration-300 hover:-translate-y-0.5 hover:shadow-red-500/30"
 
                 >
 
