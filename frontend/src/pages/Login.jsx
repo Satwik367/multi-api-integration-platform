@@ -1,175 +1,122 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+import { FaEnvelope, FaLock } from "react-icons/fa";
 
 import { loginUser } from "../services/authService";
 import { useAuth } from "../context/AuthContext";
 
+import AuthLayout from "../components/auth/AuthLayout";
+import AuthInput from "../components/auth/AuthInput";
+import Button from "../components/ui/Button";
+
 function Login() {
-
-    const navigate = useNavigate();
-
-    const { setUser } = useAuth();
-
-    const [email, setEmail] = useState("");
-
-    const [password, setPassword] = useState("");
-
-    const [loading, setLoading] = useState(false);
-
-    const submitHandler = async (e) => {
-
-        e.preventDefault();
-
-        try {
-
-            setLoading(true);
-
-            const data = await loginUser({
-
-                email,
-
-                password
-
-            });
-
-            localStorage.setItem(
-
-                "token",
-
-                data.token
-
-            );
-
-            localStorage.setItem(
-
-                "user",
-
-                JSON.stringify(data.user)
-
-            );
-
-            setUser(data.user);
-
-            navigate("/dashboard");
-
-        }
-
-        catch (err) {
-
-            console.log(err);
-
-            alert(
-
-                err.response?.data?.message ||
-
-                "Login Failed"
-
-            );
-
-        }
-
-        finally {
-
-            setLoading(false);
-
-        }
-
-    };
-
-    return (
-
-        <div className="min-h-screen flex items-center justify-center bg-slate-100">
-
-            <div className="bg-white rounded-xl shadow-xl w-full max-w-md p-8">
-
-                <h1 className="text-4xl font-bold text-center mb-8">
-
-                    Login
-
-                </h1>
-
-                <form onSubmit={submitHandler}>
-
-                    <input
-
-                        className="border rounded-lg p-3 w-full mb-5"
-
-                        placeholder="Email"
-
-                        type="email"
-
-                        value={email}
-
-                        onChange={(e)=>setEmail(e.target.value)}
-
-                    />
-
-                    <input
-
-                        className="border rounded-lg p-3 w-full mb-6"
-
-                        placeholder="Password"
-
-                        type="password"
-
-                        value={password}
-
-                        onChange={(e)=>setPassword(e.target.value)}
-
-                    />
-
-                    <button
-
-                        type="submit"
-
-                        disabled={loading}
-
-                        className="bg-blue-600 hover:bg-blue-700 text-white w-full py-3 rounded-lg"
-
-                    >
-
-                        {
-
-                            loading
-
-                            ?
-
-                            "Logging In..."
-
-                            :
-
-                            "Login"
-
-                        }
-
-                    </button>
-
-                </form>
-
-                <p className="text-center mt-6">
-
-                    Don't have an account?
-
-                    <Link
-
-                        to="/register"
-
-                        className="text-blue-600 ml-2"
-
-                    >
-
-                        Register
-
-                    </Link>
-
-                </p>
-
-            </div>
-
+  const navigate = useNavigate();
+  const { setUser } = useAuth();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [loading, setLoading] = useState(false);
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+
+    try {
+      setLoading(true);
+
+      const data = await loginUser({
+        email,
+        password,
+      });
+
+      localStorage.setItem("token", data.token);
+
+      localStorage.setItem(
+        "user",
+        JSON.stringify(data.user)
+      );
+
+      setUser(data.user);
+
+      navigate("/dashboard");
+    } catch (err) {
+      console.error(err);
+
+      alert(
+        err.response?.data?.message ||
+          "Login Failed"
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <AuthLayout
+      title="Welcome Back 👋"
+      subtitle="Login to continue using APIFlow AI."
+    >
+      <form onSubmit={submitHandler}>
+        <AuthInput
+          label="Email"
+          type="email"
+          value={email}
+          required
+          icon={<FaEnvelope />}
+          placeholder="Enter your email"
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <AuthInput
+          label="Password"
+          type="password"
+          value={password}
+          required
+          icon={<FaLock />}
+          placeholder="Enter your password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <div className="mb-6 flex items-center justify-between text-sm">
+          <label className="flex items-center gap-2 text-slate-400">
+            <input
+              type="checkbox"
+              className="rounded border-slate-600 bg-slate-800"
+            />
+            Remember me
+          </label>
+
+          <button
+            type="button"
+            className="text-indigo-400 transition hover:text-indigo-300"
+          >
+            Forgot Password?
+          </button>
         </div>
 
-    );
+        <Button
+          type="submit"
+          loading={loading}
+        >
+          Sign In
+        </Button>
+      </form>
 
+      <div className="mt-8 text-center">
+        <p className="text-slate-400">
+          Don't have an account?
+        </p>
+
+        <Link
+          to="/register"
+          className="mt-2 inline-block font-semibold text-indigo-400 transition hover:text-indigo-300"
+        >
+          Create Account →
+        </Link>
+      </div>
+    </AuthLayout>
+  );
 }
 
 export default Login;
