@@ -16,90 +16,100 @@ function APIMarketplace() {
         {
             name: "Weather API",
             description: "Get live weather information for any city.",
-            icon: <FaCloudSun className="text-5xl text-yellow-500" />,
+            icon: <FaCloudSun />,
             route: "/executor/weather",
-            color: "bg-yellow-50"
+            tone: "text-[#e6b333] bg-[#e6b333]/10"
         },
 
         {
             name: "GitHub API",
             description: "Search GitHub users and repositories.",
-            icon: <FaGithub className="text-5xl text-black" />,
+            icon: <FaGithub />,
             route: "/executor/github",
-            color: "bg-gray-100"
+            tone: "text-[var(--color-ink)] bg-[var(--color-surface-raised)] border border-[var(--color-hairline)]"
         },
 
         {
             name: "News API",
             description: "Read the latest news articles worldwide.",
-            icon: <FaNewspaper className="text-5xl text-red-500" />,
+            icon: <FaNewspaper />,
             route: "/executor/news",
-            color: "bg-red-50"
+            tone: "text-[var(--color-signal-coral)] bg-[var(--color-signal-coral-soft)]"
         },
 
         {
             name: "Currency API",
             description: "Convert currencies using real-time rates.",
-            icon: <FaExchangeAlt className="text-5xl text-green-600" />,
+            icon: <FaExchangeAlt />,
             route: "/executor/currency",
-            color: "bg-green-50"
+            tone: "text-[var(--color-signal-mint)] bg-[var(--color-signal-mint-soft)]"
         },
 
         {
             name: "Gemini AI",
             description: "Ask Google's Gemini AI anything.",
-            icon: <FaRobot className="text-5xl text-purple-600" />,
+            icon: <FaRobot />,
             route: "/executor/gemini",
-            color: "bg-purple-50"
+            tone: "text-[var(--color-signal-indigo)] bg-[var(--color-signal-indigo-soft)]"
         },
 
         {
             name: "Workflow Builder",
             description: "Create and execute multi-step API workflows.",
-            icon: <FaProjectDiagram className="text-5xl text-blue-600" />,
+            icon: <FaProjectDiagram />,
             route: "/workflows",
-            color: "bg-blue-50"
+            tone: "text-[var(--color-signal-indigo)] bg-[var(--color-signal-indigo-soft)]"
         }
 
     ];
 
     return (
 
-        <div className="p-8">
+        <div>
 
-            <h1 className="text-4xl font-bold mb-10">
+            <div className="mb-10">
 
-                API Marketplace
+                <h1 className="font-display text-3xl font-semibold text-[var(--color-ink)]">
 
-            </h1>
+                    API Marketplace
 
-            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
+                </h1>
+
+                <p className="mt-2 text-sm text-[var(--color-ink-muted)]">
+
+                    Browse every integration available in your workspace.
+
+                </p>
+
+            </div>
+
+            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
 
                 {
 
-                    apis.map((api,index)=>(
+                    apis.map((api, index) => (
 
                         <div
 
                             key={index}
 
-                            className={`${api.color} rounded-2xl shadow-lg p-8 hover:shadow-2xl transition-all duration-300`}
+                            className="rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-surface)] p-7 transition-colors duration-300 hover:border-[var(--color-signal-indigo)]/40"
 
                         >
 
-                            <div className="mb-6">
+                            <div className={`mb-6 flex h-14 w-14 items-center justify-center rounded-xl text-2xl ${api.tone}`}>
 
                                 {api.icon}
 
                             </div>
 
-                            <h2 className="text-2xl font-bold">
+                            <h2 className="font-display text-xl font-semibold text-[var(--color-ink)]">
 
                                 {api.name}
 
                             </h2>
 
-                            <p className="text-gray-600 mt-4 mb-8">
+                            <p className="mt-3 text-sm leading-6 text-[var(--color-ink-muted)]">
 
                                 {api.description}
 
@@ -109,7 +119,7 @@ function APIMarketplace() {
 
                                 to={api.route}
 
-                                className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-lg"
+                                className="mt-6 inline-block rounded-xl bg-[var(--color-signal-indigo)] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[var(--color-signal-indigo)]/90"
 
                             >
 

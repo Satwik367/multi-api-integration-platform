@@ -10,6 +10,8 @@ import {
     runWorkflow
 } from "../services/workflowExecutionService";
 
+import Button from "../components/ui/Button";
+
 function WorkflowBuilder() {
 
     const [name, setName] = useState("");
@@ -127,7 +129,7 @@ function WorkflowBuilder() {
 
             await loadWorkflows();
 
-            alert("Workflow Saved");
+            alert("Workflow saved");
 
         }
 
@@ -181,7 +183,7 @@ function WorkflowBuilder() {
 
             console.log(err);
 
-            alert("Workflow Execution Failed");
+            alert("Workflow execution failed");
 
         }
 
@@ -193,23 +195,35 @@ function WorkflowBuilder() {
 
     };
 
+    const inputClasses = "rounded-xl border border-[var(--color-hairline)] bg-[var(--color-surface-raised)] p-3 w-full text-[var(--color-ink)] placeholder:text-[var(--color-ink-faint)] outline-none focus:border-[var(--color-signal-indigo)] transition-colors";
+
     return (
 
-        <div className="p-8 bg-slate-100 min-h-screen">
+        <div>
 
-            <h1 className="text-4xl font-bold mb-8">
+            <div className="mb-8">
 
-                Workflow Builder
+                <h1 className="font-display text-3xl font-semibold text-[var(--color-ink)]">
 
-            </h1>
+                    Workflow Builder
 
-            <div className="bg-white rounded-xl shadow-lg p-6">
+                </h1>
+
+                <p className="mt-2 text-sm text-[var(--color-ink-muted)]">
+
+                    Chain multiple APIs together into a single reusable pipeline.
+
+                </p>
+
+            </div>
+
+            <div className="rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-surface)] p-7">
 
                 <input
 
-                    className="border rounded-lg p-3 w-full mb-4"
+                    className={`${inputClasses} mb-4`}
 
-                    placeholder="Workflow Name"
+                    placeholder="Workflow name"
 
                     value={name}
 
@@ -219,11 +233,11 @@ function WorkflowBuilder() {
 
                 <textarea
 
-                    className="border rounded-lg p-3 w-full mb-4"
+                    className={`${inputClasses} mb-4`}
 
                     rows="3"
 
-                    placeholder="Workflow Description"
+                    placeholder="Workflow description"
 
                     value={description}
 
@@ -241,7 +255,7 @@ function WorkflowBuilder() {
 
                                 key={index}
 
-                                className="border rounded-lg p-3 w-full"
+                                className={inputClasses}
 
                                 value={step.api}
 
@@ -279,43 +293,31 @@ function WorkflowBuilder() {
 
                 <div className="flex gap-4 mt-6">
 
-                    <button
+                    <Button
+
+                        variant="secondary"
 
                         onClick={addStep}
 
-                        className="bg-blue-600 text-white px-5 py-3 rounded-lg"
-
                     >
 
-                        Add Step
+                        Add step
 
-                    </button>
+                    </Button>
 
-                    <button
+                    <Button
 
-                        disabled={loading}
+                        variant="success"
+
+                        loading={loading}
 
                         onClick={saveWorkflow}
 
-                        className="bg-green-600 text-white px-5 py-3 rounded-lg"
-
                     >
 
-                        {
+                        Save workflow
 
-                            loading
-
-                            ?
-
-                            "Saving..."
-
-                            :
-
-                            "Save Workflow"
-
-                        }
-
-                    </button>
+                    </Button>
 
                 </div>
 
@@ -323,9 +325,9 @@ function WorkflowBuilder() {
 
             <div className="mt-10">
 
-                <h2 className="text-3xl font-bold mb-5">
+                <h2 className="font-display text-2xl font-semibold text-[var(--color-ink)] mb-5">
 
-                    Saved Workflows
+                    Saved workflows
 
                 </h2>
 
@@ -337,7 +339,7 @@ function WorkflowBuilder() {
 
                     (
 
-                        <div className="bg-white rounded-lg shadow p-6">
+                        <div className="rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-surface)] p-6 text-sm text-[var(--color-ink-muted)]">
 
                             No workflows created yet.
 
@@ -353,17 +355,17 @@ function WorkflowBuilder() {
 
                             key={workflow._id}
 
-                            className="bg-white rounded-xl shadow-lg p-6 mb-6"
+                            className="rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-surface)] p-7 mb-6"
 
                         >
 
-                            <h3 className="text-2xl font-bold">
+                            <h3 className="font-display text-xl font-semibold text-[var(--color-ink)]">
 
                                 {workflow.name}
 
                             </h3>
 
-                            <p className="text-gray-600 mt-2">
+                            <p className="mt-2 text-sm text-[var(--color-ink-muted)]">
 
                                 {workflow.description}
 
@@ -379,7 +381,7 @@ function WorkflowBuilder() {
 
                                             key={index}
 
-                                            className="bg-blue-100 text-blue-700 px-4 py-2 rounded-full"
+                                            className="rounded-full bg-[var(--color-signal-indigo-soft)] text-[var(--color-signal-indigo)] px-4 py-1.5 text-sm font-medium"
 
                                         >
 
@@ -395,29 +397,29 @@ function WorkflowBuilder() {
 
                             <div className="flex gap-4 mt-6">
 
-                                <button
+                                <Button
+
+                                    variant="success"
 
                                     onClick={()=>executeWorkflow(workflow._id)}
 
-                                    className="bg-green-600 text-white px-5 py-2 rounded-lg"
-
                                 >
 
-                                    Run Workflow
+                                    Run workflow
 
-                                </button>
+                                </Button>
 
-                                <button
+                                <Button
+
+                                    variant="danger"
 
                                     onClick={()=>removeWorkflow(workflow._id)}
-
-                                    className="bg-red-600 text-white px-5 py-2 rounded-lg"
 
                                 >
 
                                     Delete
 
-                                </button>
+                                </Button>
 
                             </div>
 
@@ -433,15 +435,15 @@ function WorkflowBuilder() {
 
                 result &&
 
-                <div className="bg-white rounded-xl shadow-lg p-6 mt-10">
+                <div className="rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-surface)] p-7 mt-10">
 
-                    <h2 className="text-3xl font-bold mb-4">
+                    <h2 className="font-display text-2xl font-semibold text-[var(--color-ink)] mb-4">
 
-                        Workflow Output
+                        Workflow output
 
                     </h2>
 
-                    <pre className="whitespace-pre-wrap">
+                    <pre className="font-data whitespace-pre-wrap text-sm text-[var(--color-ink-muted)]">
 
                         {result}
 

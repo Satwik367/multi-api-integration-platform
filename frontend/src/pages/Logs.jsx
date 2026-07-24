@@ -47,11 +47,11 @@ function Logs() {
 
         return (
 
-            <div className="p-8">
+            <div>
 
-                <h2 className="text-2xl font-bold">
+                <h2 className="font-display text-xl font-semibold text-[var(--color-ink)]">
 
-                    Loading Activity Logs...
+                    Loading activity logs...
 
                 </h2>
 
@@ -67,13 +67,13 @@ function Logs() {
 
             <div>
 
-                <h1 className="text-4xl font-bold">
+                <h1 className="font-display text-3xl font-semibold text-[var(--color-ink)]">
 
                     API Activity Logs
 
                 </h1>
 
-                <p className="text-gray-500 mt-2">
+                <p className="mt-2 text-sm text-[var(--color-ink-muted)]">
 
                     Every API request made through the platform is recorded here.
 
@@ -89,21 +89,21 @@ function Logs() {
 
                 (
 
-                    <div className="bg-white rounded-xl shadow-lg p-10 text-center">
+                    <div className="rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-surface)] p-10 text-center">
 
                         <FaDatabase
 
-                            className="text-6xl text-blue-600 mx-auto mb-6"
+                            className="text-5xl text-[var(--color-signal-indigo)] mx-auto mb-6"
 
                         />
 
-                        <h2 className="text-2xl font-bold">
+                        <h2 className="font-display text-xl font-semibold text-[var(--color-ink)]">
 
-                            No Logs Found
+                            No logs found
 
                         </h2>
 
-                        <p className="text-gray-500 mt-3">
+                        <p className="mt-3 text-sm text-[var(--color-ink-muted)]">
 
                             Execute an API to generate activity logs.
 
@@ -127,7 +127,7 @@ function Logs() {
 
                                     key={log._id}
 
-                                    className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition"
+                                    className="rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-surface)] p-6 transition-colors hover:border-[var(--color-signal-indigo)]/30"
 
                                 >
 
@@ -135,13 +135,13 @@ function Logs() {
 
                                         <div>
 
-                                            <h2 className="text-2xl font-bold">
+                                            <h2 className="font-display text-xl font-semibold text-[var(--color-ink)]">
 
                                                 {log.api}
 
                                             </h2>
 
-                                            <p className="text-gray-500 mt-2">
+                                            <p className="font-data mt-1.5 text-xs text-[var(--color-ink-muted)]">
 
                                                 {
 
@@ -167,11 +167,11 @@ function Logs() {
 
                                                 (
 
-                                                    <div className="flex items-center gap-2 text-green-600 font-bold">
+                                                    <div className="flex items-center gap-2 text-sm font-medium text-[var(--color-signal-mint)]">
 
                                                         <FaCheckCircle />
 
-                                                        SUCCESS
+                                                        Success
 
                                                     </div>
 
@@ -181,11 +181,11 @@ function Logs() {
 
                                                 (
 
-                                                    <div className="flex items-center gap-2 text-red-600 font-bold">
+                                                    <div className="flex items-center gap-2 text-sm font-medium text-[var(--color-signal-coral)]">
 
                                                         <FaTimesCircle />
 
-                                                        FAILED
+                                                        Failed
 
                                                     </div>
 
@@ -203,16 +203,14 @@ function Logs() {
 
                                         <div className="mt-6">
 
-                                            <h3 className="font-bold mb-2">
+                                            <h3 className="mb-2 text-xs font-medium uppercase tracking-wide text-[var(--color-ink-muted)]">
 
                                                 Request
 
                                             </h3>
 
-                                            <pre className="bg-slate-100 rounded-lg p-4 overflow-x-auto whitespace-pre-wrap">
-
+                                            <pre className="font-data rounded-xl border border-[var(--color-hairline)] bg-[var(--color-surface-raised)] p-4 overflow-x-auto whitespace-pre-wrap text-xs text-[var(--color-ink-muted)]">
 {JSON.stringify(log.request,null,2)}
-
                                             </pre>
 
                                         </div>
@@ -225,16 +223,14 @@ function Logs() {
 
                                         <div className="mt-6">
 
-                                            <h3 className="font-bold mb-2">
+                                            <h3 className="mb-2 text-xs font-medium uppercase tracking-wide text-[var(--color-ink-muted)]">
 
                                                 Response
 
                                             </h3>
 
-                                            <pre className="bg-slate-100 rounded-lg p-4 overflow-x-auto whitespace-pre-wrap">
-
+                                            <pre className="font-data rounded-xl border border-[var(--color-hairline)] bg-[var(--color-surface-raised)] p-4 overflow-x-auto whitespace-pre-wrap text-xs text-[var(--color-ink-muted)]">
 {JSON.stringify(log.response,null,2)}
-
                                             </pre>
 
                                         </div>

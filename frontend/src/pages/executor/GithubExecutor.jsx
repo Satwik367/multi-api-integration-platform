@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import { getGithub } from "../../services/githubService";
+import Button from "../../components/ui/Button";
 
 function GithubExecutor() {
 
@@ -8,9 +9,13 @@ function GithubExecutor() {
 
     const [data, setData] = useState(null);
 
+    const [loading, setLoading] = useState(false);
+
     const execute = async () => {
 
         try {
+
+            setLoading(true);
 
             const res = await getGithub(username);
 
@@ -20,7 +25,13 @@ function GithubExecutor() {
 
         catch {
 
-            alert("User Not Found");
+            alert("User not found");
+
+        }
+
+        finally {
+
+            setLoading(false);
 
         }
 
@@ -28,21 +39,31 @@ function GithubExecutor() {
 
     return (
 
-        <div className="p-8">
+        <div>
 
-            <h1 className="text-3xl font-bold">
+            <div className="mb-8">
 
-                GitHub API
+                <h1 className="font-display text-3xl font-semibold text-[var(--color-ink)]">
 
-            </h1>
+                    GitHub API
 
-            <div className="flex gap-4 mt-6">
+                </h1>
+
+                <p className="mt-2 text-sm text-[var(--color-ink-muted)]">
+
+                    Look up a GitHub user's profile and repositories.
+
+                </p>
+
+            </div>
+
+            <div className="flex gap-4">
 
                 <input
 
-                    className="border p-3 rounded w-80"
+                    className="w-full max-w-md rounded-xl border border-[var(--color-hairline)] bg-[var(--color-surface-raised)] p-3 text-[var(--color-ink)] placeholder:text-[var(--color-ink-faint)] outline-none focus:border-[var(--color-signal-indigo)] transition-colors"
 
-                    placeholder="GitHub Username"
+                    placeholder="GitHub username"
 
                     value={username}
 
@@ -50,17 +71,17 @@ function GithubExecutor() {
 
                 />
 
-                <button
-
-                    className="bg-black text-white px-6 rounded"
+                <Button
 
                     onClick={execute}
+
+                    loading={loading}
 
                 >
 
                     Execute
 
-                </button>
+                </Button>
 
             </div>
 
@@ -68,31 +89,30 @@ function GithubExecutor() {
 
                 data && (
 
-                    <div className="bg-white shadow rounded-lg p-6 mt-8">
+                    <div className="rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-surface)] p-6 mt-8 max-w-md">
 
                         <img
 
                             src={data.avatar}
 
-                            className="w-28 rounded-full"
+                            className="w-20 rounded-full border border-[var(--color-hairline)]"
 
                         />
 
-                        <h2 className="text-2xl font-bold mt-4">
+                        <h2 className="font-display mt-4 text-xl font-semibold text-[var(--color-ink)]">
 
                             {data.name}
 
                         </h2>
 
-                        <p>@{data.username}</p>
+                        <p className="font-data text-sm text-[var(--color-ink-muted)]">@{data.username}</p>
 
-                        <p>Followers : {data.followers}</p>
-
-                        <p>Following : {data.following}</p>
-
-                        <p>Repositories : {data.repositories}</p>
-
-                        <p>{data.location}</p>
+                        <div className="mt-4 space-y-1.5 text-sm text-[var(--color-ink-muted)]">
+                            <p>Followers: <span className="font-data text-[var(--color-ink)]">{data.followers}</span></p>
+                            <p>Following: <span className="font-data text-[var(--color-ink)]">{data.following}</span></p>
+                            <p>Repositories: <span className="font-data text-[var(--color-ink)]">{data.repositories}</span></p>
+                            <p>{data.location}</p>
+                        </div>
 
                         <a
 
@@ -100,11 +120,13 @@ function GithubExecutor() {
 
                             target="_blank"
 
-                            className="text-blue-600"
+                            rel="noreferrer"
+
+                            className="mt-4 inline-block text-sm font-medium text-[var(--color-signal-indigo)] hover:opacity-80"
 
                         >
 
-                            Visit Profile
+                            Visit profile →
 
                         </a>
 

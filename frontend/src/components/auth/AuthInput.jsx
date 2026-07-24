@@ -16,14 +16,14 @@ function AuthInput({
 
   return (
     <div className="mb-6">
-      <label className="mb-2 block text-sm font-medium text-slate-300">
+      <label className="mb-2 block text-sm font-medium text-[var(--color-ink-muted)]">
         {label}
       </label>
 
-      <div className="group flex items-center rounded-xl border border-slate-700 bg-slate-800/70 transition-all duration-300 focus-within:border-indigo-500 focus-within:ring-2 focus-within:ring-indigo-500/30">
+      <div className="group flex items-center rounded-xl border border-[var(--color-hairline)] bg-[var(--color-surface-raised)] transition-colors duration-200 focus-within:border-[var(--color-signal-indigo)]">
         {/* Left Icon */}
 
-        <div className="pl-4 text-slate-400">
+        <div className="pl-4 text-[var(--color-ink-faint)]">
           {icon}
         </div>
 
@@ -41,7 +41,7 @@ function AuthInput({
           onChange={onChange}
           placeholder={placeholder}
           required={required}
-          className="w-full bg-transparent px-4 py-4 text-white placeholder:text-slate-500 outline-none"
+          className="w-full bg-transparent px-4 py-3.5 text-[var(--color-ink)] placeholder:text-[var(--color-ink-faint)] outline-none"
         />
 
         {/* Password Toggle */}
@@ -50,7 +50,7 @@ function AuthInput({
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
-            className="pr-4 text-slate-400 transition hover:text-white"
+            className="pr-4 text-[var(--color-ink-faint)] transition hover:text-[var(--color-ink)]"
           >
             {showPassword ? <FaEyeSlash /> : <FaEye />}
           </button>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { askGemini } from "../../services/geminiService";
+import Button from "../../components/ui/Button";
 
 function GeminiExecutor() {
 
@@ -28,7 +29,7 @@ function GeminiExecutor() {
 
                 err.response?.data?.message ||
 
-                "Gemini API Failed"
+                "Gemini API failed"
 
             );
 
@@ -44,19 +45,29 @@ function GeminiExecutor() {
 
     return (
 
-        <div className="p-8">
+        <div>
 
-            <h1 className="text-3xl font-bold mb-6">
+            <div className="mb-8">
 
-                Gemini AI Assistant
+                <h1 className="font-display text-3xl font-semibold text-[var(--color-ink)]">
 
-            </h1>
+                    Gemini AI Assistant
+
+                </h1>
+
+                <p className="mt-2 text-sm text-[var(--color-ink-muted)]">
+
+                    Ask Google's Gemini anything and get a live response.
+
+                </p>
+
+            </div>
 
             <textarea
 
                 rows="6"
 
-                className="border rounded-lg w-full p-4"
+                className="w-full rounded-xl border border-[var(--color-hairline)] bg-[var(--color-surface-raised)] p-4 text-[var(--color-ink)] placeholder:text-[var(--color-ink-faint)] outline-none focus:border-[var(--color-signal-indigo)] transition-colors"
 
                 placeholder="Ask Gemini anything..."
 
@@ -66,37 +77,25 @@ function GeminiExecutor() {
 
             />
 
-            <button
+            <Button
 
-                className="mt-5 bg-purple-600 text-white px-6 py-3 rounded-lg"
+                className="mt-5"
 
-                disabled={loading}
+                loading={loading}
 
                 onClick={execute}
 
             >
 
-                {
+                {loading ? "Thinking..." : "Ask AI"}
 
-                    loading
-
-                    ?
-
-                    "Thinking..."
-
-                    :
-
-                    "Ask AI"
-
-                }
-
-            </button>
+            </Button>
 
             {
 
                 answer &&
 
-                <div className="bg-white mt-8 shadow rounded-xl p-6 prose max-w-none">
+                <div className="md-content mt-8 rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-surface)] p-6 text-[var(--color-ink-muted)]">
 
                     <ReactMarkdown>
 

@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import { getNews } from "../../services/newsService";
+import Button from "../../components/ui/Button";
 
 function NewsExecutor() {
 
@@ -8,9 +9,13 @@ function NewsExecutor() {
 
     const [articles, setArticles] = useState([]);
 
+    const [loading, setLoading] = useState(false);
+
     const searchNews = async () => {
 
         try {
+
+            setLoading(true);
 
             const data = await getNews(query);
 
@@ -24,25 +29,41 @@ function NewsExecutor() {
 
         }
 
+        finally {
+
+            setLoading(false);
+
+        }
+
     };
 
     return (
 
-        <div className="p-8">
+        <div>
 
-            <h1 className="text-3xl font-bold mb-8">
+            <div className="mb-8">
 
-                News API
+                <h1 className="font-display text-3xl font-semibold text-[var(--color-ink)]">
 
-            </h1>
+                    News API
+
+                </h1>
+
+                <p className="mt-2 text-sm text-[var(--color-ink-muted)]">
+
+                    Search the latest headlines on any topic.
+
+                </p>
+
+            </div>
 
             <div className="flex gap-4">
 
                 <input
 
-                    className="border p-3 rounded w-96"
+                    className="w-full max-w-md rounded-xl border border-[var(--color-hairline)] bg-[var(--color-surface-raised)] p-3 text-[var(--color-ink)] placeholder:text-[var(--color-ink-faint)] outline-none focus:border-[var(--color-signal-indigo)] transition-colors"
 
-                    placeholder="Search Topic"
+                    placeholder="Search topic"
 
                     value={query}
 
@@ -50,17 +71,17 @@ function NewsExecutor() {
 
                 />
 
-                <button
+                <Button
 
                     onClick={searchNews}
 
-                    className="bg-red-600 text-white px-6 rounded"
+                    loading={loading}
 
                 >
 
                     Search
 
-                </button>
+                </Button>
 
             </div>
 
@@ -68,7 +89,7 @@ function NewsExecutor() {
 
                 articles.length > 0 && (
 
-                    <div className="mt-8 space-y-6">
+                    <div className="mt-8 space-y-5">
 
                         {
 
@@ -78,17 +99,17 @@ function NewsExecutor() {
 
                                     key={index}
 
-                                    className="bg-white shadow rounded-lg p-6"
+                                    className="rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-surface)] p-6"
 
                                 >
 
-                                    <h2 className="text-xl font-bold">
+                                    <h2 className="font-display text-lg font-semibold text-[var(--color-ink)]">
 
                                         {article.title}
 
                                     </h2>
 
-                                    <p className="mt-3">
+                                    <p className="mt-3 text-sm leading-6 text-[var(--color-ink-muted)]">
 
                                         {article.description}
 
@@ -102,11 +123,11 @@ function NewsExecutor() {
 
                                         rel="noreferrer"
 
-                                        className="text-blue-600"
+                                        className="mt-4 inline-block text-sm font-medium text-[var(--color-signal-indigo)] hover:opacity-80"
 
                                     >
 
-                                        Read Full Article
+                                        Read full article →
 
                                     </a>
 

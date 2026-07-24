@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import { getWeather } from "../../services/weatherService";
+import Button from "../../components/ui/Button";
 
 function WeatherExecutor() {
 
@@ -8,9 +9,13 @@ function WeatherExecutor() {
 
     const [result, setResult] = useState(null);
 
+    const [loading, setLoading] = useState(false);
+
     const execute = async () => {
 
         try {
+
+            setLoading(true);
 
             const data = await getWeather(city);
 
@@ -20,7 +25,13 @@ function WeatherExecutor() {
 
         catch {
 
-            alert("Unable to Fetch");
+            alert("Unable to fetch");
+
+        }
+
+        finally {
+
+            setLoading(false);
 
         }
 
@@ -28,19 +39,29 @@ function WeatherExecutor() {
 
     return (
 
-        <div className="p-8">
+        <div>
 
-            <h1 className="text-3xl font-bold">
+            <div className="mb-8">
 
-                Weather API
+                <h1 className="font-display text-3xl font-semibold text-[var(--color-ink)]">
 
-            </h1>
+                    Weather API
 
-            <div className="mt-6 flex gap-4">
+                </h1>
+
+                <p className="mt-2 text-sm text-[var(--color-ink-muted)]">
+
+                    Get live weather information for any city.
+
+                </p>
+
+            </div>
+
+            <div className="flex gap-4">
 
                 <input
 
-                    className="border p-3 rounded w-96"
+                    className="w-full max-w-md rounded-xl border border-[var(--color-hairline)] bg-[var(--color-surface-raised)] p-3 text-[var(--color-ink)] placeholder:text-[var(--color-ink-faint)] outline-none focus:border-[var(--color-signal-indigo)] transition-colors"
 
                     placeholder="City"
 
@@ -50,17 +71,17 @@ function WeatherExecutor() {
 
                 />
 
-                <button
+                <Button
 
                     onClick={execute}
 
-                    className="bg-blue-600 text-white px-6 rounded"
+                    loading={loading}
 
                 >
 
                     Execute
 
-                </button>
+                </Button>
 
             </div>
 
@@ -70,7 +91,7 @@ function WeatherExecutor() {
 
                     <pre
 
-                        className="mt-8 bg-gray-900 text-green-400 p-6 rounded overflow-auto"
+                        className="font-data mt-8 rounded-xl border border-[var(--color-hairline)] bg-[var(--color-surface)] p-6 text-sm text-[var(--color-signal-mint)] overflow-auto"
 
                     >
 

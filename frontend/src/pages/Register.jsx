@@ -43,7 +43,7 @@ function Register() {
 
       alert(
         err.response?.data?.message ||
-          "Registration Failed"
+          "Registration failed"
       );
     } finally {
       setLoading(false);
@@ -52,12 +52,12 @@ function Register() {
 
   return (
     <AuthLayout
-      title="Create Account 🚀"
+      title="Create your account"
       subtitle="Join APIFlow AI and start building workflows."
     >
       <form onSubmit={submitHandler}>
         <AuthInput
-          label="Full Name"
+          label="Full name"
           value={name}
           required
           icon={<FaUser />}
@@ -88,21 +88,22 @@ function Register() {
         <Button
           type="submit"
           loading={loading}
+          className="w-full"
         >
-          Create Account
+          Create account
         </Button>
       </form>
 
       <div className="mt-8 text-center">
-        <p className="text-slate-400">
+        <p className="text-sm text-[var(--color-ink-muted)]">
           Already have an account?
         </p>
 
         <Link
           to="/login"
-          className="mt-2 inline-block font-semibold text-indigo-400 hover:text-indigo-300 transition"
+          className="mt-2 inline-block font-semibold text-[var(--color-signal-indigo)] hover:opacity-80 transition"
         >
-          Sign In →
+          Sign in →
         </Link>
       </div>
     </AuthLayout>

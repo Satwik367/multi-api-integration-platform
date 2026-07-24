@@ -85,3 +85,31 @@ button{
     background:transparent;
 
 }
+
+.md-content p { margin-bottom: 1em; line-height: 1.7; }
+.md-content h1, .md-content h2, .md-content h3 {
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 600;
+    margin-top: 1.2em;
+    margin-bottom: 0.5em;
+    color: var(--color-ink);
+}
+.md-content ul, .md-content ol { margin: 0.5em 0 1em 1.4em; }
+.md-content li { margin-bottom: 0.4em; }
+.md-content code {
+    font-family: "JetBrains Mono", monospace;
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-hairline);
+    border-radius: 4px;
+    padding: 0.1em 0.4em;
+    font-size: 0.9em;
+}
+.md-content pre {
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-hairline);
+    border-radius: 8px;
+    padding: 1em;
+    overflow-x: auto;
+    margin-bottom: 1em;
+}
+.md-content strong { color: var(--color-ink); font-weight: 600; }
