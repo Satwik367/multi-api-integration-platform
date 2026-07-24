@@ -1,119 +1,123 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-import FlowLine from "../ui/FlowLine";
+import { FaEnvelope, FaLock } from "react-icons/fa";
 
-function AuthLayout({ title, subtitle, children }) {
+import { loginUser } from "../services/authService";
+import { useAuth } from "../context/AuthContext";
+
+import AuthLayout from "../components/auth/AuthLayout";
+import AuthInput from "../components/auth/AuthInput";
+import Button from "../components/ui/Button";
+
+function Login() {
+  const navigate = useNavigate();
+  const { setUser } = useAuth();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [loading, setLoading] = useState(false);
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+
+    try {
+      setLoading(true);
+
+      const data = await loginUser({
+        email,
+        password,
+      });
+
+      localStorage.setItem("token", data.token);
+
+      localStorage.setItem(
+        "user",
+        JSON.stringify(data.user)
+      );
+
+      setUser(data.user);
+
+      navigate("/dashboard");
+    } catch (err) {
+      console.error(err);
+
+      alert(
+        err.response?.data?.message ||
+          "Login failed"
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-[var(--color-base)] text-[var(--color-ink)] overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0">
-        <div className="absolute -top-40 -left-40 h-96 w-96 rounded-full bg-[var(--color-signal-indigo)]/10 blur-3xl" />
-        <div className="absolute bottom-0 right-0 h-[500px] w-[500px] rounded-full bg-[var(--color-signal-mint)]/10 blur-3xl" />
-      </div>
+    <AuthLayout
+      title="Welcome back"
+      subtitle="Log in to continue using APIFlow AI."
+    >
+      <form onSubmit={submitHandler}>
+        <AuthInput
+          label="Email"
+          type="email"
+          value={email}
+          required
+          icon={<FaEnvelope />}
+          placeholder="Enter your email"
+          onChange={(e) => setEmail(e.target.value)}
+        />
 
-      <div className="relative flex min-h-screen">
-        {/* Left Section */}
+        <AuthInput
+          label="Password"
+          type="password"
+          value={password}
+          required
+          icon={<FaLock />}
+          placeholder="Enter your password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
 
-        <motion.div
-          initial={{ opacity: 0, x: -60 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.7 }}
-          className="hidden lg:flex w-1/2 flex-col justify-center px-20"
-        >
-          <h1 className="font-display text-5xl font-semibold leading-tight text-[var(--color-ink)]">
-            Build.
-            <br />
-            <span className="text-[var(--color-signal-indigo)]">Integrate.</span>
-            <br />
-            Automate.
-          </h1>
-
-          <p className="mt-8 max-w-md text-lg leading-8 text-[var(--color-ink-muted)]">
-            APIFlow AI lets developers connect multiple APIs,
-            build intelligent workflows and automate tasks
-            from one dashboard.
-          </p>
-
-          <div className="mt-16 space-y-6">
-            <Feature
-              title="Multiple API Integrations"
-              desc="Weather, GitHub, News, Currency & Gemini AI."
+        <div className="mb-6 flex items-center justify-between text-sm">
+          <label className="flex items-center gap-2 text-[var(--color-ink-muted)]">
+            <input
+              type="checkbox"
+              className="rounded border-[var(--color-hairline)] bg-[var(--color-surface-raised)]"
             />
+            Remember me
+          </label>
 
-            <Feature
-              title="Workflow Automation"
-              desc="Create reusable API pipelines."
-            />
-
-            <Feature
-              title="Secure Authentication"
-              desc="JWT protected backend with MongoDB."
-            />
-          </div>
-        </motion.div>
-
-        {/* Right Section */}
-
-        <div className="flex flex-1 items-center justify-center px-6">
-
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="relative w-full max-w-md overflow-hidden rounded-2xl border border-[var(--color-hairline)]
-                       bg-[var(--color-surface)]
-                       p-10"
+          <button
+            type="button"
+            className="text-[var(--color-signal-indigo)] transition hover:opacity-80"
           >
-            <FlowLine orientation="horizontal" tone="indigo" className="absolute inset-x-0 top-0" />
-
-            <div className="mb-10">
-
-              <h2 className="font-display text-3xl font-semibold text-[var(--color-ink)]">
-
-                {title}
-
-              </h2>
-
-              <p className="mt-2.5 text-sm text-[var(--color-ink-muted)]">
-
-                {subtitle}
-
-              </p>
-
-            </div>
-
-            {children}
-
-          </motion.div>
-
+            Forgot password?
+          </button>
         </div>
 
-      </div>
+        <Button
+          type="submit"
+          loading={loading}
+          className="w-full"
+        >
+          Sign in
+        </Button>
+      </form>
 
-    </div>
-  );
-}
-
-function Feature({ title, desc }) {
-  return (
-    <div className="flex gap-4">
-      <div className="mt-2 h-2 w-2 rounded-full bg-[var(--color-signal-indigo)]" />
-
-      <div>
-        <h3 className="font-medium text-[var(--color-ink)]">
-
-          {title}
-
-        </h3>
-
-        <p className="mt-1 text-sm text-[var(--color-ink-muted)]">
-
-          {desc}
-
+      <div className="mt-8 text-center">
+        <p className="text-sm text-[var(--color-ink-muted)]">
+          Don't have an account?
         </p>
+
+        <Link
+          to="/register"
+          className="mt-2 inline-block font-semibold text-[var(--color-signal-indigo)] transition hover:opacity-80"
+        >
+          Create account →
+        </Link>
       </div>
-    </div>
+    </AuthLayout>
   );
 }
 
-export default AuthLayout;
+export default Login;

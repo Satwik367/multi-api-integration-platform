@@ -1,12 +1,14 @@
 import { motion } from "framer-motion";
 
+import FlowLine from "../ui/FlowLine";
+
 function AuthLayout({ title, subtitle, children }) {
   return (
-    <div className="min-h-screen bg-slate-950 text-white overflow-hidden">
+    <div className="min-h-screen bg-[var(--color-base)] text-[var(--color-ink)] overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0">
-        <div className="absolute -top-40 -left-40 h-96 w-96 rounded-full bg-indigo-600/20 blur-3xl" />
-        <div className="absolute bottom-0 right-0 h-[500px] w-[500px] rounded-full bg-purple-600/20 blur-3xl" />
+        <div className="absolute -top-40 -left-40 h-96 w-96 rounded-full bg-[var(--color-signal-indigo)]/10 blur-3xl" />
+        <div className="absolute bottom-0 right-0 h-[500px] w-[500px] rounded-full bg-[var(--color-signal-mint)]/10 blur-3xl" />
       </div>
 
       <div className="relative flex min-h-screen">
@@ -18,18 +20,18 @@ function AuthLayout({ title, subtitle, children }) {
           transition={{ duration: 0.7 }}
           className="hidden lg:flex w-1/2 flex-col justify-center px-20"
         >
-          <h1 className="text-6xl font-black leading-tight">
+          <h1 className="font-display text-5xl font-semibold leading-tight text-[var(--color-ink)]">
             Build.
             <br />
-            <span className="text-indigo-400">Integrate.</span>
+            <span className="text-[var(--color-signal-indigo)]">Integrate.</span>
             <br />
             Automate.
           </h1>
 
-          <p className="mt-8 text-xl text-slate-300 leading-9">
+          <p className="mt-8 max-w-md text-lg leading-8 text-[var(--color-ink-muted)]">
             APIFlow AI lets developers connect multiple APIs,
             build intelligent workflows and automate tasks
-            from one beautiful dashboard.
+            from one dashboard.
           </p>
 
           <div className="mt-16 space-y-6">
@@ -58,19 +60,21 @@ function AuthLayout({ title, subtitle, children }) {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="w-full max-w-md rounded-3xl border border-white/10
-                       bg-slate-900/60 backdrop-blur-xl
-                       p-10 shadow-2xl"
+            className="relative w-full max-w-md overflow-hidden rounded-2xl border border-[var(--color-hairline)]
+                       bg-[var(--color-surface)]
+                       p-10"
           >
+            <FlowLine orientation="horizontal" tone="indigo" className="absolute inset-x-0 top-0" />
+
             <div className="mb-10">
 
-              <h2 className="text-4xl font-bold">
+              <h2 className="font-display text-3xl font-semibold text-[var(--color-ink)]">
 
                 {title}
 
               </h2>
 
-              <p className="mt-3 text-slate-400">
+              <p className="mt-2.5 text-sm text-[var(--color-ink-muted)]">
 
                 {subtitle}
 
@@ -93,16 +97,16 @@ function AuthLayout({ title, subtitle, children }) {
 function Feature({ title, desc }) {
   return (
     <div className="flex gap-4">
-      <div className="mt-2 h-3 w-3 rounded-full bg-indigo-500" />
+      <div className="mt-2 h-2 w-2 rounded-full bg-[var(--color-signal-indigo)]" />
 
       <div>
-        <h3 className="font-semibold text-lg">
+        <h3 className="font-medium text-[var(--color-ink)]">
 
           {title}
 
         </h3>
 
-        <p className="text-slate-400">
+        <p className="mt-1 text-sm text-[var(--color-ink-muted)]">
 
           {desc}
 
