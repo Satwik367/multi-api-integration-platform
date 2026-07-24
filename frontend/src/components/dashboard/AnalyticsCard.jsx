@@ -21,8 +21,8 @@ function AnalyticsCard({ analytics }) {
     ];
 
     const COLORS = [
-        "#22c55e",
-        "#ef4444"
+        "#33e6b3",
+        "#ff6b57"
     ];
 
     const successRate =
@@ -46,7 +46,7 @@ function AnalyticsCard({ analytics }) {
             transition={{
                 duration: 0.5
             }}
-            className="rounded-3xl border border-white/10 bg-slate-900/60 backdrop-blur-xl p-8"
+            className="rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-surface)] p-8"
         >
             <div className="flex flex-col lg:flex-row gap-10 items-center">
 
@@ -89,13 +89,13 @@ function AnalyticsCard({ analytics }) {
 
                 <div className="flex-1">
 
-                    <h2 className="text-3xl font-bold text-white">
+                    <h2 className="font-display text-2xl font-semibold text-[var(--color-ink)]">
 
                         API Analytics
 
                     </h2>
 
-                    <p className="mt-2 text-slate-400">
+                    <p className="mt-2 text-sm text-[var(--color-ink-muted)]">
 
                         Overview of workflow execution and API performance.
 
@@ -105,13 +105,13 @@ function AnalyticsCard({ analytics }) {
 
                         <div className="flex justify-between">
 
-                            <span className="text-slate-400">
+                            <span className="text-sm text-[var(--color-ink-muted)]">
 
                                 Success Rate
 
                             </span>
 
-                            <span className="font-bold text-green-400">
+                            <span className="font-data font-medium text-[var(--color-signal-mint)]">
 
                                 {successRate}%
 
@@ -119,7 +119,7 @@ function AnalyticsCard({ analytics }) {
 
                         </div>
 
-                        <div className="h-3 rounded-full bg-slate-700 overflow-hidden">
+                        <div className="h-2 rounded-full bg-[var(--color-hairline)] overflow-hidden">
 
                             <motion.div
 
@@ -135,7 +135,7 @@ function AnalyticsCard({ analytics }) {
                                     duration: 1
                                 }}
 
-                                className="h-full rounded-full bg-green-500"
+                                className="h-full rounded-full bg-[var(--color-signal-mint)]"
 
                             />
 
@@ -143,15 +143,15 @@ function AnalyticsCard({ analytics }) {
 
                         <div className="grid grid-cols-2 gap-4 mt-8">
 
-                            <div className="rounded-2xl bg-white/5 border border-white/10 p-5">
+                            <div className="rounded-xl bg-[var(--color-surface-raised)] border border-[var(--color-hairline)] p-5">
 
-                                <p className="text-slate-400">
+                                <p className="text-xs text-[var(--color-ink-muted)]">
 
                                     Successful
 
                                 </p>
 
-                                <h3 className="mt-2 text-3xl font-bold text-green-400">
+                                <h3 className="font-data mt-2 text-2xl font-medium tabular-data text-[var(--color-signal-mint)]">
 
                                     {analytics.successfulCalls}
 
@@ -159,15 +159,15 @@ function AnalyticsCard({ analytics }) {
 
                             </div>
 
-                            <div className="rounded-2xl bg-white/5 border border-white/10 p-5">
+                            <div className="rounded-xl bg-[var(--color-surface-raised)] border border-[var(--color-hairline)] p-5">
 
-                                <p className="text-slate-400">
+                                <p className="text-xs text-[var(--color-ink-muted)]">
 
                                     Failed
 
                                 </p>
 
-                                <h3 className="mt-2 text-3xl font-bold text-red-400">
+                                <h3 className="font-data mt-2 text-2xl font-medium tabular-data text-[var(--color-signal-coral)]">
 
                                     {analytics.failedCalls}
 
@@ -177,15 +177,15 @@ function AnalyticsCard({ analytics }) {
 
                         </div>
 
-                        <div className="mt-8 rounded-2xl bg-gradient-to-r from-indigo-600/20 to-cyan-600/20 border border-indigo-500/20 p-6">
+                        <div className="mt-8 rounded-xl bg-[var(--color-signal-indigo-soft)] border border-[var(--color-signal-indigo)]/20 p-6">
 
-                            <h3 className="font-semibold text-xl text-white">
+                            <h3 className="font-display font-semibold text-lg text-[var(--color-ink)]">
 
                                 API Health
 
                             </h3>
 
-                            <p className="mt-2 text-slate-300">
+                            <p className="mt-2 text-sm text-[var(--color-ink-muted)]">
 
                                 {successRate >= 95
                                     ? "Excellent performance. Your APIs are operating smoothly."

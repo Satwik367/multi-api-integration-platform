@@ -5,213 +5,86 @@ import {
     FaArrowRight
 } from "react-icons/fa";
 
+import FlowLine from "../ui/FlowLine";
+
 function HeroSection({ analytics }) {
 
     const hour = new Date().getHours();
 
-    let greeting = "Good Evening";
+    let greeting = "Good evening";
 
     if (hour < 12) {
-
-        greeting = "Good Morning";
-
+        greeting = "Good morning";
+    } else if (hour < 17) {
+        greeting = "Good afternoon";
     }
 
-    else if (hour < 17) {
-
-        greeting = "Good Afternoon";
-
-    }
+    const successRate = analytics.totalCalls === 0
+        ? "0%"
+        : `${Math.round(analytics.successfulCalls * 100 / analytics.totalCalls)}%`;
 
     return (
 
         <motion.div
 
-            initial={{
-                opacity: 0,
-                y: 30
-            }}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
 
-            animate={{
-                opacity: 1,
-                y: 0
-            }}
-
-            transition={{
-                duration: 0.6
-            }}
-
-            className="relative overflow-hidden rounded-3xl
-                       border border-white/10
-                       bg-gradient-to-br
-                       from-indigo-600/20
-                       via-slate-900/80
-                       to-cyan-600/20
-                       backdrop-blur-xl
-                       p-10"
+            className="relative overflow-hidden rounded-2xl border border-[var(--color-hairline)]
+                       bg-[var(--color-surface)] p-10"
 
         >
 
-            {/* Glow */}
-
-            <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-indigo-600 opacity-20 blur-3xl" />
-
-            <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-cyan-500 opacity-20 blur-3xl" />
+            <FlowLine orientation="horizontal" tone="indigo" className="absolute inset-x-0 top-0" />
 
             <div className="relative z-10">
 
-                <motion.h1
+                <h1 className="font-display text-3xl font-semibold text-[var(--color-ink)]">
+                    {greeting}
+                </h1>
 
-                    initial={{
-                        opacity: 0,
-                        x: -20
-                    }}
-
-                    animate={{
-                        opacity: 1,
-                        x: 0
-                    }}
-
-                    transition={{
-                        delay: 0.2
-                    }}
-
-                    className="text-5xl font-black text-white"
-
-                >
-
-                    👋 {greeting}
-
-                </motion.h1>
-
-                <motion.h2
-
-                    initial={{
-                        opacity: 0
-                    }}
-
-                    animate={{
-                        opacity: 1
-                    }}
-
-                    transition={{
-                        delay: 0.35
-                    }}
-
-                    className="mt-3 text-3xl font-bold text-indigo-300"
-
-                >
-
+                <h2 className="mt-2 text-lg text-[var(--color-ink-muted)]">
                     Welcome back to APIFlow AI
+                </h2>
 
-                </motion.h2>
+                <p className="mt-5 max-w-2xl text-[15px] leading-7 text-[var(--color-ink-muted)]">
+                    Your workspace for integrating Weather, GitHub, News, Currency and
+                    Gemini AI &mdash; and orchestrating them into automated workflows
+                    from a single dashboard.
+                </p>
 
-                <motion.p
+                <div className="mt-8 flex flex-wrap gap-4">
 
-                    initial={{
-                        opacity: 0
-                    }}
-
-                    animate={{
-                        opacity: 1
-                    }}
-
-                    transition={{
-                        delay: 0.45
-                    }}
-
-                    className="mt-6 max-w-3xl text-lg leading-8 text-slate-300"
-
-                >
-
-                    Your intelligent workspace for integrating
-
-                    Weather, GitHub, News, Currency,
-
-                    Gemini AI and automated workflows
-
-                    from a single unified dashboard.
-
-                </motion.p>
-
-                <div className="mt-10 flex flex-wrap gap-6">
-
-                    <div className="rounded-2xl bg-white/5 border border-white/10 px-6 py-5">
-
-                        <p className="text-sm text-slate-400">
-
+                    <div className="rounded-xl border border-[var(--color-hairline)] bg-[var(--color-surface-raised)] px-6 py-4">
+                        <p className="text-xs text-[var(--color-ink-muted)]">
                             Total API Calls
-
                         </p>
-
-                        <h3 className="mt-2 text-4xl font-bold">
-
+                        <h3 className="font-data mt-1.5 text-3xl font-medium tabular-data text-[var(--color-ink)]">
                             {analytics.totalCalls}
-
                         </h3>
-
                     </div>
 
-                    <div className="rounded-2xl bg-white/5 border border-white/10 px-6 py-5">
-
-                        <p className="text-sm text-slate-400">
-
+                    <div className="rounded-xl border border-[var(--color-hairline)] bg-[var(--color-surface-raised)] px-6 py-4">
+                        <p className="text-xs text-[var(--color-ink-muted)]">
                             Success Rate
-
                         </p>
-
-                        <h3 className="mt-2 text-4xl font-bold text-green-400">
-
-                            {
-
-                                analytics.totalCalls === 0
-
-                                ?
-
-                                "0%"
-
-                                :
-
-                                `${Math.round(
-
-                                    analytics.successfulCalls * 100 /
-
-                                    analytics.totalCalls
-
-                                )}%`
-
-                            }
-
+                        <h3 className="font-data mt-1.5 text-3xl font-medium tabular-data text-[var(--color-signal-mint)]">
+                            {successRate}
                         </h3>
-
                     </div>
 
                 </div>
 
                 <button
-
-                    className="mt-10 flex items-center gap-3
-                               rounded-2xl
-                               bg-gradient-to-r
-                               from-indigo-600
-                               to-purple-600
-                               px-8
-                               py-4
-                               font-semibold
-                               text-white
-                               shadow-xl
-                               transition
-                               duration-300
-                               hover:scale-105"
-
+                    className="mt-8 flex items-center gap-2.5 rounded-xl
+                               bg-[var(--color-signal-indigo)]
+                               px-6 py-3.5 text-sm font-semibold text-white
+                               transition-transform duration-200 hover:-translate-y-0.5"
                 >
-
-                    <FaBolt />
-
-                    Start Exploring
-
-                    <FaArrowRight />
-
+                    <FaBolt size={13} />
+                    Start exploring
+                    <FaArrowRight size={13} />
                 </button>
 
             </div>

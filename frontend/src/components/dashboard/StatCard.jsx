@@ -1,94 +1,61 @@
+// StatCard.jsx
 import { motion } from "framer-motion";
+
+import FlowLine from "../ui/FlowLine";
+
+const toneMap = {
+    indigo: { text: "text-[var(--color-signal-indigo)]", bg: "bg-[var(--color-signal-indigo-soft)]" },
+    mint: { text: "text-[var(--color-signal-mint)]", bg: "bg-[var(--color-signal-mint-soft)]" },
+    coral: { text: "text-[var(--color-signal-coral)]", bg: "bg-[var(--color-signal-coral-soft)]" },
+};
 
 function StatCard({
     title,
     value,
     icon,
-    color,
+    tone = "indigo",
     subtitle,
     delay = 0
 }) {
+
+    const colors = toneMap[tone] || toneMap.indigo;
 
     return (
 
         <motion.div
 
-            initial={{
-                opacity: 0,
-                y: 25
-            }}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay }}
+            whileHover={{ y: -3 }}
 
-            animate={{
-                opacity: 1,
-                y: 0
-            }}
-
-            transition={{
-                duration: 0.45,
-                delay
-            }}
-
-            whileHover={{
-                y: -6,
-                scale: 1.02
-            }}
-
-            className="relative overflow-hidden rounded-3xl border border-white/10
-                       bg-slate-900/60 backdrop-blur-xl
-                       p-6 shadow-xl transition-all"
+            className="relative overflow-hidden rounded-2xl border border-[var(--color-hairline)]
+                       bg-[var(--color-surface)] p-6 transition-transform"
 
         >
 
-            {/* Background Glow */}
+            <FlowLine orientation="horizontal" tone={tone} className="absolute inset-x-0 top-0" />
 
-            <div
-
-                className={`absolute -right-10 -top-10 h-36 w-36 rounded-full blur-3xl opacity-20 ${color}`}
-
-            />
-
-            {/* Icon */}
-
-            <div className="flex items-center justify-between">
+            <div className="flex items-start justify-between">
 
                 <div>
-
-                    <p className="text-sm text-slate-400">
-
+                    <p className="text-sm text-[var(--color-ink-muted)]">
                         {title}
-
                     </p>
 
-                    <h2 className="mt-4 text-5xl font-extrabold text-white">
-
+                    <h2 className="font-data mt-3 text-4xl font-medium tabular-data text-[var(--color-ink)]">
                         {value}
-
                     </h2>
 
-                    {
-
-                        subtitle && (
-
-                            <p className="mt-2 text-sm text-slate-500">
-
-                                {subtitle}
-
-                            </p>
-
-                        )
-
-                    }
-
+                    {subtitle && (
+                        <p className="mt-2 text-xs text-[var(--color-ink-faint)]">
+                            {subtitle}
+                        </p>
+                    )}
                 </div>
 
-                <div
-
-                    className={`flex h-16 w-16 items-center justify-center rounded-2xl text-3xl text-white shadow-lg ${color}`}
-
-                >
-
+                <div className={`flex h-11 w-11 items-center justify-center rounded-xl text-lg ${colors.bg} ${colors.text}`}>
                     {icon}
-
                 </div>
 
             </div>

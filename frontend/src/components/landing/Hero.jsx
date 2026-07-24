@@ -45,9 +45,9 @@ const item = {
 export default function Hero() {
   return (
     <section className="relative overflow-hidden pt-36 pb-24">
-      <div className="absolute inset-0 -z-20 bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950" />
+      <div className="absolute inset-0 -z-20 bg-[var(--color-base)]" />
 
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,#4338ca33,transparent_40%),radial-gradient(circle_at_bottom_right,#06b6d433,transparent_40%)]" />
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,#6c6bff22,transparent_40%),radial-gradient(circle_at_bottom_right,#33e6b31a,transparent_40%)]" />
 
       <div className="absolute inset-0 -z-10 bg-[linear-gradient(rgba(255,255,255,.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.04)_1px,transparent_1px)] bg-[size:40px_40px]" />
 
@@ -64,15 +64,15 @@ export default function Hero() {
             AI Powered Workflow Automation
           </Badge>
 
-          <h1 className="max-w-3xl text-5xl font-black leading-tight tracking-tight text-white md:text-6xl lg:text-7xl">
+          <h1 className="font-display max-w-3xl text-5xl font-semibold leading-[1.05] tracking-tight text-[var(--color-ink)] md:text-6xl lg:text-7xl">
             Build
-            <span className="bg-gradient-to-r from-indigo-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent">
-              {" "}Intelligent API{" "}
+            <span className="text-[var(--color-signal-indigo)]">
+              {" "}intelligent API{" "}
             </span>
-            Workflows Visually
+            workflows, visually
           </h1>
 
-          <p className="mt-8 max-w-2xl text-lg leading-8 text-slate-400">
+          <p className="mt-8 max-w-2xl text-lg leading-8 text-[var(--color-ink-muted)]">
             Connect APIs, AI models and cloud services with an intuitive
             workflow builder. Create, execute and monitor powerful
             automations without writing repetitive integration code.
@@ -101,7 +101,7 @@ export default function Hero() {
             </div>
 
             <span>
-              Trusted by <span className="font-semibold text-white">2,000+</span>{" "}
+              Trusted by <span className="font-data font-medium text-[var(--color-ink)]">2,000+</span>{" "}
               developers worldwide
             </span>
           </div>
@@ -154,7 +154,7 @@ export default function Hero() {
               duration: 50,
               ease: "linear"
             }}
-            className="absolute h-[430px] w-[430px] rounded-full border border-cyan-500/10"
+            className="absolute h-[430px] w-[430px] rounded-full border border-[var(--color-signal-mint)]/10"
           />
 
           <div className="relative h-[560px] w-[560px] lg:h-[600px] lg:w-[600px] rounded-[40px] border border-white/10 bg-white/[0.04] backdrop-blur-2xl shadow-[0_30px_80px_rgba(0,0,0,.45)]">
@@ -314,7 +314,7 @@ export default function Hero() {
                 repeat: Infinity,
                 duration: 4
               }}
-              className="absolute right-8 top-8 rounded-xl border border-cyan-500/20 bg-cyan-500/10 px-4 py-2 text-xs font-semibold text-cyan-300"
+              className="absolute right-8 top-8 rounded-xl border border-[var(--color-signal-mint)]/20 bg-[var(--color-signal-mint)]/10 px-4 py-2 font-data text-xs font-medium text-[var(--color-signal-mint)]"
             >
               AI EXECUTION RUNNING
             </motion.div>
@@ -325,7 +325,7 @@ export default function Hero() {
                 repeat: Infinity,
                 duration: 5
               }}
-              className="absolute left-8 bottom-8 rounded-xl border border-emerald-500/20 bg-emerald-500/10 px-4 py-2 text-xs font-semibold text-emerald-300"
+              className="absolute left-8 bottom-8 rounded-xl border border-[var(--color-signal-mint)]/20 bg-[var(--color-signal-mint)]/10 px-4 py-2 font-data text-xs font-medium text-[var(--color-signal-mint)]"
             >
               5 APIs Connected
             </motion.div>
@@ -415,7 +415,7 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-slate-950 via-slate-950/70 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[var(--color-base)] via-[var(--color-base)]/70 to-transparent" />
 
       <motion.div
         initial={{

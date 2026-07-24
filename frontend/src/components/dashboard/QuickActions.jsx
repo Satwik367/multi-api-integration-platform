@@ -17,7 +17,7 @@ function QuickActions() {
             title: "Weather",
             description: "Live weather forecasts and current conditions.",
             icon: <FaCloudSun />,
-            color: "bg-yellow-500",
+            color: "bg-[#e6b333]",
             to: "/executor/weather"
         },
 
@@ -25,7 +25,7 @@ function QuickActions() {
             title: "GitHub",
             description: "Analyze GitHub profiles and repositories.",
             icon: <FaGithub />,
-            color: "bg-slate-700",
+            color: "bg-[var(--color-surface-raised)] border border-[var(--color-hairline)]",
             to: "/executor/github"
         },
 
@@ -33,7 +33,7 @@ function QuickActions() {
             title: "News",
             description: "Stay updated with the latest headlines.",
             icon: <FaNewspaper />,
-            color: "bg-red-500",
+            color: "bg-[var(--color-signal-coral)]",
             to: "/executor/news"
         },
 
@@ -41,7 +41,7 @@ function QuickActions() {
             title: "Currency",
             description: "Convert currencies with real-time rates.",
             icon: <FaExchangeAlt />,
-            color: "bg-green-600",
+            color: "bg-[var(--color-signal-mint)]",
             to: "/executor/currency"
         },
 
@@ -49,7 +49,7 @@ function QuickActions() {
             title: "Gemini AI",
             description: "Ask AI anything using Google's Gemini.",
             icon: <FaRobot />,
-            color: "bg-purple-600",
+            color: "bg-[var(--color-signal-indigo)]",
             to: "/executor/gemini"
         },
 
@@ -57,7 +57,7 @@ function QuickActions() {
             title: "Workflows",
             description: "Create and execute custom API workflows.",
             icon: <FaProjectDiagram />,
-            color: "bg-blue-600",
+            color: "bg-[var(--color-signal-indigo)]",
             to: "/workflows"
         }
 
@@ -69,13 +69,13 @@ function QuickActions() {
 
             <div className="mb-8">
 
-                <h2 className="text-3xl font-bold text-white">
+                <h2 className="font-display text-2xl font-semibold text-[var(--color-ink)]">
 
                     Quick Launch
 
                 </h2>
 
-                <p className="mt-2 text-slate-400">
+                <p className="mt-2 text-sm text-[var(--color-ink-muted)]">
 
                     Access your most frequently used services.
 

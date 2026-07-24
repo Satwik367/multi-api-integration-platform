@@ -24,19 +24,19 @@ function ActivityTimeline({ activities }) {
 
     return (
 
-        <div className="rounded-3xl border border-white/10 bg-slate-900/60 backdrop-blur-xl p-8">
+        <div className="rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-surface)] p-8">
 
             <div className="flex items-center justify-between mb-8">
 
-                <h2 className="text-3xl font-bold text-white">
+                <h2 className="font-display text-2xl font-semibold text-[var(--color-ink)]">
 
                     Recent Activity
 
                 </h2>
 
-                <span className="text-slate-400">
+                <span className="font-data text-sm text-[var(--color-ink-muted)]">
 
-                    {activities.length} Logs
+                    {activities.length} logs
 
                 </span>
 
@@ -48,7 +48,7 @@ function ActivityTimeline({ activities }) {
 
                 (
 
-                    <p className="text-slate-400">
+                    <p className="text-sm text-[var(--color-ink-muted)]">
 
                         No activity yet.
 
@@ -78,13 +78,13 @@ function ActivityTimeline({ activities }) {
 
                                     whileHover={{ x: 5 }}
 
-                                    className="flex justify-between items-center rounded-2xl border border-white/10 bg-white/5 p-5"
+                                    className="flex justify-between items-center rounded-xl border border-[var(--color-hairline)] bg-[var(--color-surface-raised)] p-5"
 
                                 >
 
                                     <div className="flex items-center gap-5">
 
-                                        <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-600 text-2xl text-white">
+                                        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--color-signal-indigo-soft)] text-lg text-[var(--color-signal-indigo)]">
 
                                             {iconMap[log.api] || <FaProjectDiagram />}
 
@@ -92,13 +92,13 @@ function ActivityTimeline({ activities }) {
 
                                         <div>
 
-                                            <h3 className="font-semibold text-white">
+                                            <h3 className="font-medium text-[var(--color-ink)]">
 
                                                 {log.api}
 
                                             </h3>
 
-                                            <p className="text-sm text-slate-400">
+                                            <p className="font-data text-xs text-[var(--color-ink-muted)]">
 
                                                 {new Date(log.createdAt).toLocaleString()}
 
@@ -114,11 +114,11 @@ function ActivityTimeline({ activities }) {
 
                                         ?
 
-                                        <FaCheckCircle className="text-2xl text-green-500"/>
+                                        <FaCheckCircle className="text-xl text-[var(--color-signal-mint)]"/>
 
                                         :
 
-                                        <FaTimesCircle className="text-2xl text-red-500"/>
+                                        <FaTimesCircle className="text-xl text-[var(--color-signal-coral)]"/>
 
                                     }
 

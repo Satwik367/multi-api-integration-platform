@@ -41,16 +41,13 @@ function QuickActionCard({
 
                 to={to}
 
-                className="group relative flex h-full flex-col overflow-hidden rounded-3xl
-                           border border-white/10
-                           bg-slate-900/60
+                className="group relative flex h-full flex-col overflow-hidden rounded-2xl
+                           border border-[var(--color-hairline)]
+                           bg-[var(--color-surface)]
                            p-6
-                           backdrop-blur-xl
-                           transition-all
+                           transition-colors
                            duration-300
-                           hover:border-indigo-500/40
-                           hover:shadow-2xl
-                           hover:shadow-indigo-500/20"
+                           hover:border-[var(--color-signal-indigo)]/40"
 
             >
 
@@ -64,13 +61,13 @@ function QuickActionCard({
 
                 </div>
 
-                <h3 className="mt-6 text-2xl font-bold text-white">
+                <h3 className="font-display mt-6 text-xl font-semibold text-[var(--color-ink)]">
 
                     {title}
 
                 </h3>
 
-                <p className="mt-3 text-sm leading-6 text-slate-400">
+                <p className="mt-3 text-sm leading-6 text-[var(--color-ink-muted)]">
 
                     {description}
 
@@ -81,7 +78,7 @@ function QuickActionCard({
                     <span
 
                         className="inline-flex items-center gap-2
-                                   text-indigo-400
+                                   text-[var(--color-signal-indigo)]
                                    transition-all
                                    duration-300
                                    group-hover:gap-4"
