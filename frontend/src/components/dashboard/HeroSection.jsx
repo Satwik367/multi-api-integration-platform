@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 import {
     FaBolt,
@@ -7,7 +8,9 @@ import {
 
 import FlowLine from "../ui/FlowLine";
 
-function HeroSection({ analytics }) {
+function HeroSection() {
+
+    const navigate = useNavigate();
 
     const hour = new Date().getHours();
 
@@ -18,10 +21,6 @@ function HeroSection({ analytics }) {
     } else if (hour < 17) {
         greeting = "Good afternoon";
     }
-
-    const successRate = analytics.totalCalls === 0
-        ? "0%"
-        : `${Math.round(analytics.successfulCalls * 100 / analytics.totalCalls)}%`;
 
     return (
 
@@ -54,29 +53,8 @@ function HeroSection({ analytics }) {
                     from a single dashboard.
                 </p>
 
-                <div className="mt-8 flex flex-wrap gap-4">
-
-                    <div className="rounded-xl border border-[var(--color-hairline)] bg-[var(--color-surface-raised)] px-6 py-4">
-                        <p className="text-xs text-[var(--color-ink-muted)]">
-                            Total API Calls
-                        </p>
-                        <h3 className="font-data mt-1.5 text-3xl font-medium tabular-data text-[var(--color-ink)]">
-                            {analytics.totalCalls}
-                        </h3>
-                    </div>
-
-                    <div className="rounded-xl border border-[var(--color-hairline)] bg-[var(--color-surface-raised)] px-6 py-4">
-                        <p className="text-xs text-[var(--color-ink-muted)]">
-                            Success Rate
-                        </p>
-                        <h3 className="font-data mt-1.5 text-3xl font-medium tabular-data text-[var(--color-signal-mint)]">
-                            {successRate}
-                        </h3>
-                    </div>
-
-                </div>
-
                 <button
+                    onClick={() => navigate("/marketplace")}
                     className="mt-8 flex items-center gap-2.5 rounded-xl
                                bg-[var(--color-signal-indigo)]
                                px-6 py-3.5 text-sm font-semibold text-white

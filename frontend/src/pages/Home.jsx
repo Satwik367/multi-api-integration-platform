@@ -1,28 +1,27 @@
 import Navbar from "../components/landing/Navbar";
 import Hero from "../components/landing/Hero";
-
-// These components will be added next
-// import Integrations from "../components/landing/Integrations";
-// import WhyChooseUs from "../components/landing/WhyChooseUs";
-// import WorkflowPreview from "../components/landing/WorkflowPreview";
-// import DashboardPreview from "../components/landing/DashboardPreview";
-// import CTA from "../components/landing/CTA";
-// import Footer from "../components/landing/Footer";
+import Features from "../components/landing/Features";
+import HowItWorks from "../components/landing/HowItWorks";
+import WorkflowShowcase from "../components/landing/WorkflowShowcase";
+import Testimonials from "../components/landing/Testimonials";
+import CTA from "../components/landing/CTA";
+import Footer from "../components/landing/Footer";
 
 function Home() {
   return (
-    <main className="min-h-screen overflow-x-hidden bg-[#09090B] text-white">
+    <main className="min-h-screen overflow-x-hidden bg-[var(--color-base)] text-[var(--color-ink)]">
       <Navbar />
-      <Hero />
 
-      {/*
-      <Integrations />
-      <WhyChooseUs />
-      <WorkflowPreview />
-      <DashboardPreview />
-      <CTA />
+      <div className="space-y-16">
+        <Hero />
+        <Features />
+        <HowItWorks />
+        <WorkflowShowcase />
+        <Testimonials />
+        <CTA />
+      </div>
+
       <Footer />
-      */}
     </main>
   );
 }

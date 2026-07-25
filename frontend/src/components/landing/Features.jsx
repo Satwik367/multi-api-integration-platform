@@ -66,8 +66,8 @@ const features = [
 
 export default function Features() {
   return (
-    <section className="relative py-28">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
+    <section id="features" className="relative py-28">
+      <div className="mx-auto max-w-6xl px-6 lg:px-10">
         <SectionHeading
           badge="Platform Features"
           title="Everything you need to automate APIs with AI"
@@ -84,19 +84,19 @@ export default function Features() {
               transition={{ delay: index * 0.08 }}
               whileHover={{ y: -8 }}
             >
-              <Card className="h-full border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
-                <div className="mb-5 inline-flex rounded-2xl bg-indigo-500/15 p-4">
+              <Card className="h-full">
+                <div className="mb-5 inline-flex rounded-2xl bg-[var(--color-signal-indigo-soft)] p-4">
                   <Icon
-                    className="text-indigo-400"
+                    className="text-[var(--color-signal-indigo)]"
                     size={24}
                   />
                 </div>
 
-                <h3 className="mb-3 text-xl font-semibold text-white">
+                <h3 className="font-display mb-3 text-xl font-semibold text-[var(--color-ink)]">
                   {title}
                 </h3>
 
-                <p className="leading-7 text-slate-400">
+                <p className="leading-7 text-[var(--color-ink-muted)]">
                   {description}
                 </p>
               </Card>

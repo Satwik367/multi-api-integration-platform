@@ -89,7 +89,7 @@ function GithubExecutor() {
 
                 data && (
 
-                    <div className="rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-surface)] p-6 mt-8 max-w-md">
+                    <div className="rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-surface)] p-7 mt-8 max-w-md">
 
                         <img
 

@@ -90,12 +90,12 @@ export default function Hero() {
             </Button>
           </div>
 
-          <div className="mt-5 flex items-center gap-4 text-sm text-slate-400">
+          <div className="mt-5 flex items-center gap-4 text-sm text-[var(--color-ink-muted)]">
             <div className="flex -space-x-3">
               {[1, 2, 3, 4].map((i) => (
                 <div
                   key={i}
-                  className="h-10 w-10 rounded-full border-2 border-slate-900 bg-gradient-to-br from-indigo-500 to-cyan-400"
+                  className="h-10 w-10 rounded-full border-2 border-[var(--color-base)] bg-[var(--color-signal-indigo)]"
                 />
               ))}
             </div>
@@ -116,18 +116,18 @@ export default function Hero() {
               <motion.div
                 key={title}
                 whileHover={{ y: -5 }}
-                className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-xl"
+                className="flex items-center gap-3 rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-surface)] p-4"
               >
-                <div className="rounded-xl bg-indigo-500/15 p-3">
-                  <Icon size={18} className="text-indigo-400" />
+                <div className="rounded-xl bg-[var(--color-signal-indigo-soft)] p-3">
+                  <Icon size={18} className="text-[var(--color-signal-indigo)]" />
                 </div>
 
-                <span className="font-medium text-white">{title}</span>
+                <span className="font-medium text-[var(--color-ink)]">{title}</span>
               </motion.div>
             ))}
           </div>
 
-          <div className="mt-12 flex flex-wrap items-center gap-6 text-sm text-slate-400">
+          <div className="mt-12 flex flex-wrap items-center gap-6 text-sm text-[var(--color-ink-muted)]">
             <span>✔ Unlimited Workflows</span>
             <span>✔ AI Assisted</span>
             <span>✔ Drag & Drop Builder</span>
@@ -157,13 +157,13 @@ export default function Hero() {
             className="absolute h-[430px] w-[430px] rounded-full border border-[var(--color-signal-mint)]/10"
           />
 
-          <div className="relative h-[560px] w-[560px] lg:h-[600px] lg:w-[600px] rounded-[40px] border border-white/10 bg-white/[0.04] backdrop-blur-2xl shadow-[0_30px_80px_rgba(0,0,0,.45)]">
+          <div className="relative h-[560px] w-[560px] lg:h-[600px] lg:w-[600px] rounded-[40px] border border-[var(--color-hairline)] bg-[var(--color-surface)]/60 backdrop-blur-2xl shadow-[0_30px_80px_rgba(0,0,0,.45)]">
             <div className="absolute left-1/2 top-8 -translate-x-1/2">
               <WorkflowNode
                 icon={CloudSun}
                 title="Weather API"
                 subtitle="Live Forecast"
-                color="text-yellow-400"
+                color="text-[var(--color-signal-indigo)]"
               />
             </div>
 
@@ -172,7 +172,7 @@ export default function Hero() {
                 icon={BrainCircuit}
                 title="Gemini AI"
                 subtitle="Reasoning Engine"
-                color="text-violet-400"
+                color="text-[var(--color-signal-indigo)]"
               />
             </div>
 
@@ -181,7 +181,7 @@ export default function Hero() {
                 icon={GitBranch}
                 title="GitHub"
                 subtitle="Repositories"
-                color="text-white"
+                color="text-[var(--color-ink)]"
               />
             </div>
 
@@ -190,7 +190,7 @@ export default function Hero() {
                 icon={Newspaper}
                 title="News API"
                 subtitle="Top Headlines"
-                color="text-cyan-400"
+                color="text-[var(--color-signal-mint)]"
               />
             </div>
 
@@ -199,15 +199,15 @@ export default function Hero() {
                 icon={LayoutDashboard}
                 title="Dashboard"
                 subtitle="Final Output"
-                color="text-emerald-400"
+                color="text-[var(--color-signal-mint)]"
               />
             </div>
 
             <svg className="absolute inset-0 h-full w-full" viewBox="0 0 560 560">
               <defs>
                 <linearGradient id="line1" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="#818cf8" />
-                  <stop offset="100%" stopColor="#22d3ee" />
+                  <stop offset="0%" stopColor="#6c6bff" />
+                  <stop offset="100%" stopColor="#33e6b3" />
                 </linearGradient>
               </defs>
 
@@ -291,7 +291,7 @@ export default function Hero() {
                   cx={point.x}
                   cy={point.y}
                   r="5"
-                  fill="#818cf8"
+                  fill="#6c6bff"
                   animate={{
                     scale: [1, 1.7, 1],
                     opacity: [1, .5, 1]
@@ -339,7 +339,7 @@ export default function Hero() {
                 repeat: Infinity,
                 duration: 3
               }}
-              className="absolute left-1/2 top-1/2 h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo-500 blur-[90px]"
+              className="absolute left-1/2 top-1/2 h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--color-signal-indigo)] blur-[90px]"
             />
           </div>
 
@@ -352,7 +352,7 @@ export default function Hero() {
               repeat: Infinity,
               duration: 6
             }}
-            className="absolute -left-8 top-16 h-20 w-20 rounded-full bg-cyan-400/20 blur-3xl"
+            className="absolute -left-8 top-16 h-20 w-20 rounded-full bg-[var(--color-signal-mint)]/20 blur-3xl"
           />
 
           <motion.div
@@ -364,7 +364,7 @@ export default function Hero() {
               repeat: Infinity,
               duration: 7
             }}
-            className="absolute -right-10 bottom-20 h-24 w-24 rounded-full bg-indigo-500/20 blur-3xl"
+            className="absolute -right-10 bottom-20 h-24 w-24 rounded-full bg-[var(--color-signal-indigo)]/20 blur-3xl"
           />
 
           <motion.div
@@ -374,9 +374,9 @@ export default function Hero() {
               duration: 18,
               ease: "linear"
             }}
-            className="absolute left-10 top-64 flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl"
+            className="absolute left-10 top-64 flex h-14 w-14 items-center justify-center rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-surface)]"
           >
-            <CloudSun className="text-yellow-400" size={24} />
+            <CloudSun className="text-[var(--color-signal-indigo)]" size={24} />
           </motion.div>
 
           <motion.div
@@ -386,9 +386,9 @@ export default function Hero() {
               duration: 20,
               ease: "linear"
             }}
-            className="absolute right-8 top-56 flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl"
+            className="absolute right-8 top-56 flex h-14 w-14 items-center justify-center rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-surface)]"
           >
-            <BrainCircuit className="text-violet-400" size={24} />
+            <BrainCircuit className="text-[var(--color-signal-indigo)]" size={24} />
           </motion.div>
 
           <motion.div
@@ -397,9 +397,9 @@ export default function Hero() {
               repeat: Infinity,
               duration: 3
             }}
-            className="absolute right-0 bottom-40 flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl"
+            className="absolute right-0 bottom-40 flex h-14 w-14 items-center justify-center rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-surface)]"
           >
-            <GitBranch className="text-white" size={24} />
+            <GitBranch className="text-[var(--color-ink)]" size={24} />
           </motion.div>
 
           <motion.div
@@ -408,9 +408,9 @@ export default function Hero() {
               repeat: Infinity,
               duration: 4
             }}
-            className="absolute left-0 bottom-32 flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl"
+            className="absolute left-0 bottom-32 flex h-14 w-14 items-center justify-center rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-surface)]"
           >
-            <Newspaper className="text-cyan-400" size={24} />
+            <Newspaper className="text-[var(--color-signal-mint)]" size={24} />
           </motion.div>
         </motion.div>
       </motion.div>
@@ -427,7 +427,7 @@ export default function Hero() {
           y: 0
         }}
         transition={{ delay: 1.2 }}
-        className="mx-auto mt-20 flex max-w-6xl flex-wrap items-center justify-center gap-10 px-6 text-slate-500"
+        className="mx-auto mt-20 flex max-w-6xl flex-wrap items-center justify-center gap-10 px-6 text-[var(--color-ink-faint)]"
       >
         {[
           "OpenWeather",
@@ -435,17 +435,15 @@ export default function Hero() {
           "GitHub",
           "NewsAPI",
           "Currency",
-          "MongoDB",
-          "Stripe",
-          "Slack"
+          "MongoDB"
         ].map((name) => (
           <motion.div
             key={name}
             whileHover={{
               scale: 1.08,
-              color: "#ffffff"
+              color: "#f4f5f7"
             }}
-            className="text-lg font-semibold transition-colors"
+            className="font-data text-lg font-semibold transition-colors"
           >
             {name}
           </motion.div>

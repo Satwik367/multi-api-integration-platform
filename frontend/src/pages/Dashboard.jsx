@@ -60,10 +60,10 @@ function Dashboard() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="space-y-10"
+      className="space-y-14"
     >
       {/* Hero */}
-      <HeroSection analytics={analytics} />
+      <HeroSection />
 
       {/* Statistics */}
       <StatsGrid analytics={analytics} />

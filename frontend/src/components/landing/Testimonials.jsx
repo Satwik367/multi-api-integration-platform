@@ -62,11 +62,11 @@ function TestimonialCard({ testimonial, index }) {
         delay: index * 0.15,
       }}
     >
-      <Card className="group relative h-full overflow-hidden border border-white/10 bg-white/5 p-8 backdrop-blur-xl">
-        <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/0 to-cyan-500/0 opacity-0 transition duration-500 group-hover:from-indigo-500/10 group-hover:to-cyan-500/10" />
+      <Card className="group relative h-full overflow-hidden">
+        <div className="absolute inset-0 bg-[var(--color-signal-indigo)]/0 opacity-0 transition duration-500 group-hover:opacity-10 group-hover:bg-[var(--color-signal-indigo)]" />
 
         <div className="relative">
-          <Quote size={40} className="mb-6 text-indigo-400" />
+          <Quote size={40} className="mb-6 text-[var(--color-signal-indigo)]" />
 
           <div className="mb-5 flex">
             {Array.from({
@@ -75,26 +75,26 @@ function TestimonialCard({ testimonial, index }) {
               <Star
                 key={i}
                 size={18}
-                className="fill-yellow-400 text-yellow-400"
+                className="fill-[var(--color-signal-mint)] text-[var(--color-signal-mint)]"
               />
             ))}
           </div>
 
-          <p className="leading-8 text-slate-300">"{testimonial.review}"</p>
+          <p className="leading-8 text-[var(--color-ink-muted)]">"{testimonial.review}"</p>
 
           <div className="mt-8 flex items-center gap-4">
             <img
               src={testimonial.image}
               alt={testimonial.name}
-              className="h-14 w-14 rounded-full border border-white/10 bg-white"
+              className="h-14 w-14 rounded-full border border-[var(--color-hairline)] bg-[var(--color-surface-raised)]"
             />
 
             <div>
-              <h4 className="font-semibold text-white">{testimonial.name}</h4>
+              <h4 className="font-semibold text-[var(--color-ink)]">{testimonial.name}</h4>
 
-              <p className="text-sm text-slate-400">{testimonial.role}</p>
+              <p className="text-sm text-[var(--color-ink-muted)]">{testimonial.role}</p>
 
-              <p className="text-sm text-indigo-300">{testimonial.company}</p>
+              <p className="text-sm text-[var(--color-signal-indigo)]">{testimonial.company}</p>
             </div>
           </div>
         </div>
@@ -105,14 +105,14 @@ function TestimonialCard({ testimonial, index }) {
 
 export default function Testimonials() {
   return (
-    <section className="relative overflow-hidden py-32">
+    <section id="testimonials" className="relative overflow-hidden py-28">
       <div className="absolute inset-0 -z-10">
-        <div className="absolute left-10 top-20 h-80 w-80 rounded-full bg-indigo-500/10 blur-[150px]" />
+        <div className="absolute left-10 top-20 h-80 w-80 rounded-full bg-[var(--color-signal-indigo)]/10 blur-[150px]" />
 
-        <div className="absolute right-10 bottom-20 h-96 w-96 rounded-full bg-cyan-500/10 blur-[180px]" />
+        <div className="absolute right-10 bottom-20 h-96 w-96 rounded-full bg-[var(--color-signal-mint)]/10 blur-[180px]" />
       </div>
 
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
+      <div className="mx-auto max-w-6xl px-6 lg:px-10">
         <SectionHeading
           badge="Testimonials"
           title="Loved by developers building AI workflows"
@@ -136,59 +136,58 @@ export default function Testimonials() {
             transition={{
               duration: 0.7,
             }}
-            className="relative mb-16 overflow-hidden rounded-[32px] border border-white/10 bg-gradient-to-br from-indigo-500/10 via-violet-500/10 to-cyan-500/10 p-10 backdrop-blur-xl"
           >
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(99,102,241,.18),transparent_50%)]" />
+            <Card className="relative overflow-hidden">
+              <div className="relative grid gap-10 lg:grid-cols-[1fr_2fr] lg:items-center">
+                <div className="flex flex-col items-center text-center">
+                  <img
+                    src={testimonials[0].image}
+                    alt={testimonials[0].name}
+                    className="h-32 w-32 rounded-full border-4 border-[var(--color-signal-indigo)]/30 bg-[var(--color-surface-raised)] shadow-2xl"
+                  />
 
-            <div className="relative grid gap-10 lg:grid-cols-[1fr_2fr] lg:items-center">
-              <div className="flex flex-col items-center text-center">
-                <img
-                  src={testimonials[0].image}
-                  alt={testimonials[0].name}
-                  className="h-32 w-32 rounded-full border-4 border-indigo-500/30 bg-white shadow-2xl"
-                />
+                  <h3 className="font-display mt-6 text-2xl font-bold text-[var(--color-ink)]">
+                    {testimonials[0].name}
+                  </h3>
 
-                <h3 className="mt-6 text-2xl font-bold text-white">
-                  {testimonials[0].name}
-                </h3>
+                  <p className="text-[var(--color-ink-muted)]">{testimonials[0].role}</p>
 
-                <p className="text-slate-400">{testimonials[0].role}</p>
+                  <p className="text-[var(--color-signal-indigo)]">{testimonials[0].company}</p>
 
-                <p className="text-indigo-300">{testimonials[0].company}</p>
+                  <div className="mt-4 flex">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star
+                        key={i}
+                        size={18}
+                        className="fill-[var(--color-signal-mint)] text-[var(--color-signal-mint)]"
+                      />
+                    ))}
+                  </div>
+                </div>
 
-                <div className="mt-4 flex">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star
-                      key={i}
-                      size={18}
-                      className="fill-yellow-400 text-yellow-400"
-                    />
-                  ))}
+                <div>
+                  <Quote className="mb-6 text-[var(--color-signal-indigo)]" size={56} />
+
+                  <p className="text-xl leading-9 text-[var(--color-ink-muted)]">
+                    "{testimonials[0].review}"
+                  </p>
+
+                  <div className="mt-8 flex flex-wrap gap-3">
+                    {["Fast", "Reliable", "AI Powered", "Developer Friendly"].map(
+                      (tag) => (
+                        <Badge key={tag} variant="secondary">
+                          {tag}
+                        </Badge>
+                      )
+                    )}
+                  </div>
                 </div>
               </div>
-
-              <div>
-                <Quote className="mb-6 text-indigo-400" size={56} />
-
-                <p className="text-xl leading-9 text-slate-300">
-                  "{testimonials[0].review}"
-                </p>
-
-                <div className="mt-8 flex flex-wrap gap-3">
-                  {["Fast", "Reliable", "AI Powered", "Developer Friendly"].map(
-                    (tag) => (
-                      <Badge key={tag} variant="secondary">
-                        {tag}
-                      </Badge>
-                    )
-                  )}
-                </div>
-              </div>
-            </div>
+            </Card>
           </motion.div>
 
           {/* Testimonial Cards */}
-          <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-16 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
             {testimonials.slice(1).map((testimonial, index) => (
               <TestimonialCard
                 key={testimonial.name}
@@ -207,9 +206,9 @@ export default function Testimonials() {
               whileTap={{
                 scale: 0.95,
               }}
-              className="flex h-14 w-14 items-center justify-center rounded-full border border-white/10 bg-white/5 backdrop-blur-xl transition hover:border-indigo-500/30"
+              className="flex h-14 w-14 items-center justify-center rounded-full border border-[var(--color-hairline)] bg-[var(--color-surface)] transition hover:border-[var(--color-signal-indigo)]/30"
             >
-              <ChevronLeft className="text-white" />
+              <ChevronLeft className="text-[var(--color-ink)]" />
             </motion.button>
 
             <motion.button
@@ -219,9 +218,9 @@ export default function Testimonials() {
               whileTap={{
                 scale: 0.95,
               }}
-              className="flex h-14 w-14 items-center justify-center rounded-full border border-white/10 bg-white/5 backdrop-blur-xl transition hover:border-indigo-500/30"
+              className="flex h-14 w-14 items-center justify-center rounded-full border border-[var(--color-hairline)] bg-[var(--color-surface)] transition hover:border-[var(--color-signal-indigo)]/30"
             >
-              <ChevronRight className="text-white" />
+              <ChevronRight className="text-[var(--color-ink)]" />
             </motion.button>
           </div>
 
@@ -241,7 +240,7 @@ export default function Testimonials() {
             transition={{
               duration: 0.7,
             }}
-            className="mt-24 grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+            className="mt-20 grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
           >
             {[
               {
@@ -263,100 +262,13 @@ export default function Testimonials() {
             ].map((item) => (
               <Card
                 key={item.label}
-                className="border border-white/10 bg-white/5 p-7 text-center backdrop-blur-xl"
+                className="p-7 text-center"
               >
-                <h3 className="text-4xl font-bold text-white">{item.value}</h3>
+                <h3 className="font-data text-4xl font-medium text-[var(--color-ink)]">{item.value}</h3>
 
-                <p className="mt-3 text-slate-400">{item.label}</p>
+                <p className="mt-3 text-[var(--color-ink-muted)]">{item.label}</p>
               </Card>
             ))}
-          </motion.div>
-
-          {/* Bottom CTA */}
-          <motion.div
-            initial={{
-              opacity: 0,
-              y: 40,
-            }}
-            whileInView={{
-              opacity: 1,
-              y: 0,
-            }}
-            viewport={{
-              once: true,
-            }}
-            transition={{
-              duration: 0.7,
-              delay: 0.2,
-            }}
-            className="relative mt-24 overflow-hidden rounded-[32px] border border-white/10 bg-white/5 p-10 backdrop-blur-xl"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 via-violet-500/10 to-cyan-500/10" />
-
-            <motion.div
-              animate={{
-                scale: [1, 1.15, 1],
-                opacity: [0.25, 0.5, 0.25],
-              }}
-              transition={{
-                repeat: Infinity,
-                duration: 5,
-              }}
-              className="absolute right-12 top-10 h-40 w-40 rounded-full bg-indigo-500/20 blur-[90px]"
-            />
-
-            <div className="relative flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
-              <div>
-                <Badge className="mb-5">Join the Community</Badge>
-
-                <h2 className="text-4xl font-bold text-white">
-                  Build smarter workflows with AI
-                </h2>
-
-                <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-300">
-                  Thousands of developers trust our platform to integrate APIs,
-                  automate repetitive tasks and create intelligent AI-powered
-                  workflows—all without unnecessary complexity.
-                </p>
-              </div>
-
-              <div className="flex flex-wrap gap-4">
-                <button
-                  className="
-                    rounded-xl
-                    bg-gradient-to-r
-                    from-indigo-500
-                    to-cyan-500
-                    px-8
-                    py-4
-                    font-semibold
-                    text-white
-                    transition
-                    hover:scale-105
-                  "
-                >
-                  Get Started
-                </button>
-
-                <button
-                  className="
-                    rounded-xl
-                    border
-                    border-white/10
-                    bg-white/5
-                    px-8
-                    py-4
-                    font-semibold
-                    text-white
-                    backdrop-blur-xl
-                    transition
-                    hover:border-indigo-500/40
-                  "
-                >
-                  View Documentation
-                </button>
-              </div>
-            </div>
           </motion.div>
         </div>
       </div>

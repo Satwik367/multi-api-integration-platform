@@ -95,7 +95,7 @@ function GeminiExecutor() {
 
                 answer &&
 
-                <div className="md-content mt-8 rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-surface)] p-6 text-[var(--color-ink-muted)]">
+                <div className="md-content mt-8 rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-surface)] p-7 text-[var(--color-ink-muted)]">
 
                     <ReactMarkdown>
 

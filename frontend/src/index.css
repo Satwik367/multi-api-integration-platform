@@ -31,39 +31,38 @@
     --background:#0a0b10;
 }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    scroll-behavior:smooth;
-}
+@layer base {
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        scroll-behavior:smooth;
+    }
 
-body{
+    body{
+        font-family:"Inter",sans-serif;
+        min-height:100vh;
+        color:#f4f5f7;
+        background:#0a0b10;
+    }
 
-    font-family:"Inter",sans-serif;
+    h1, h2, h3, h4, .font-display {
+        font-family:"Space Grotesk",sans-serif;
+    }
 
-    min-height:100vh;
+    section[id] {
+        scroll-margin-top: 6rem;
+    }
 
-    color:#f4f5f7;
+    .font-data, .tabular-data {
+        font-family:"JetBrains Mono",monospace;
+        font-variant-numeric:tabular-nums;
+        letter-spacing:-0.01em;
+    }
 
-    background:#0a0b10;
-
-}
-
-h1, h2, h3, h4, .font-display {
-    font-family:"Space Grotesk",sans-serif;
-}
-
-.font-data, .tabular-data {
-    font-family:"JetBrains Mono",monospace;
-    font-variant-numeric:tabular-nums;
-    letter-spacing:-0.01em;
-}
-
-button{
-
-    cursor:pointer;
-
+    button{
+        cursor:pointer;
+    }
 }
 
 ::-webkit-scrollbar{

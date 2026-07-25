@@ -1,18 +1,18 @@
 import { motion } from "framer-motion";
 
-function WorkflowNode({ icon: Icon, title, subtitle = "Connected", color = "text-indigo-400", className = "" }) {
+function WorkflowNode({ icon: Icon, title, subtitle = "Connected", color = "text-[var(--color-signal-indigo)]", className = "" }) {
   return (
     <motion.div
       whileHover={{ scale: 1.05, y: -4 }}
       transition={{ duration: 0.2 }}
-      className={`flex items-center gap-3 rounded-2xl border border-white/10 bg-zinc-900/80 px-4 py-3 backdrop-blur-xl shadow-lg shadow-black/20 ${className}`}
+      className={`flex items-center gap-3 rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-surface)] px-4 py-3 shadow-lg shadow-black/20 ${className}`}
     >
-      <div className="rounded-xl bg-zinc-800 p-3">
+      <div className="rounded-xl bg-[var(--color-surface-raised)] p-3">
         <Icon size={22} className={color} />
       </div>
       <div>
-        <h4 className="text-sm font-semibold text-white">{title}</h4>
-        <p className="text-xs text-slate-400">{subtitle}</p>
+        <h4 className="text-sm font-semibold text-[var(--color-ink)]">{title}</h4>
+        <p className="text-xs text-[var(--color-ink-muted)]">{subtitle}</p>
       </div>
     </motion.div>
   );

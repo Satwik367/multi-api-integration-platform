@@ -44,7 +44,7 @@ function QuickActionCard({
                 className="group relative flex h-full flex-col overflow-hidden rounded-2xl
                            border border-[var(--color-hairline)]
                            bg-[var(--color-surface)]
-                           p-6
+                           p-7
                            transition-colors
                            duration-300
                            hover:border-[var(--color-signal-indigo)]/40"

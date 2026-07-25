@@ -93,7 +93,7 @@ function APIMarketplace() {
 
                             key={index}
 
-                            className="rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-surface)] p-7 transition-colors duration-300 hover:border-[var(--color-signal-indigo)]/40"
+                            className="rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-surface)] p-8 transition-colors duration-300 hover:border-[var(--color-signal-indigo)]/40"
 
                         >
 

@@ -48,7 +48,7 @@ function Profile() {
 
             </h1>
 
-            <div className="rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-surface)] p-8 max-w-3xl">
+            <div className="rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-surface)] p-10 max-w-3xl">
 
                 <div className="flex items-center gap-6">
 
@@ -78,7 +78,7 @@ function Profile() {
 
                 <div className="grid grid-cols-2 gap-5 mt-10">
 
-                    <div className="rounded-xl border border-[var(--color-hairline)] bg-[var(--color-surface-raised)] p-5">
+                    <div className="rounded-xl border border-[var(--color-hairline)] bg-[var(--color-surface-raised)] p-6">
 
                         <p className="text-xs text-[var(--color-ink-muted)]">
 
@@ -94,7 +94,7 @@ function Profile() {
 
                     </div>
 
-                    <div className="rounded-xl border border-[var(--color-hairline)] bg-[var(--color-surface-raised)] p-5">
+                    <div className="rounded-xl border border-[var(--color-hairline)] bg-[var(--color-surface-raised)] p-6">
 
                         <p className="text-xs text-[var(--color-ink-muted)]">
 
@@ -110,7 +110,7 @@ function Profile() {
 
                     </div>
 
-                    <div className="rounded-xl border border-[var(--color-hairline)] bg-[var(--color-surface-raised)] p-5">
+                    <div className="rounded-xl border border-[var(--color-hairline)] bg-[var(--color-surface-raised)] p-6">
 
                         <p className="text-xs text-[var(--color-ink-muted)]">
 
@@ -126,7 +126,7 @@ function Profile() {
 
                     </div>
 
-                    <div className="rounded-xl border border-[var(--color-hairline)] bg-[var(--color-surface-raised)] p-5">
+                    <div className="rounded-xl border border-[var(--color-hairline)] bg-[var(--color-surface-raised)] p-6">
 
                         <p className="text-xs text-[var(--color-ink-muted)]">
 

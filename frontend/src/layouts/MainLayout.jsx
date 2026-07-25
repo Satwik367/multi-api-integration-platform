@@ -13,9 +13,13 @@ function MainLayout({ children }) {
 
                 <DashboardHeader />
 
-                <main className="flex-1 overflow-y-auto p-10">
+                <main className="flex-1 overflow-y-auto p-12">
 
-                    {children}
+                    <div className="mx-auto max-w-7xl">
+
+                        {children}
+
+                    </div>
 
                 </main>
 

@@ -7,9 +7,8 @@ import Button from "../ui/Button";
 
 const navLinks = [
   { name: "Features", href: "#features" },
-  { name: "Workflow", href: "#workflow" },
-  { name: "Dashboard", href: "#dashboard" },
-  { name: "Pricing", href: "#cta" },
+  { name: "How It Works", href: "#workflow" },
+  { name: "Testimonials", href: "#testimonials" },
 ];
 
 function Navbar() {
@@ -35,7 +34,7 @@ function Navbar() {
         animate={{ y: 0, opacity: 1 }}
         className={`w-[95%] max-w-[1440px] rounded-2xl border transition-all duration-300 ${
           scrolled
-            ? "border-white/10 bg-black/70 backdrop-blur-xl"
+            ? "border-[var(--color-hairline)] bg-[var(--color-base)]/80 backdrop-blur-xl"
             : "border-transparent bg-transparent"
         }`}
       >
@@ -48,7 +47,7 @@ function Navbar() {
             to="/"
             className="flex items-center gap-3"
           >
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-600">
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--color-signal-indigo)]">
 
               <Workflow size={22} className="text-white" />
 
@@ -56,13 +55,13 @@ function Navbar() {
 
             <div>
 
-              <h2 className="text-lg font-bold text-white">
+              <h2 className="font-display text-lg font-bold text-[var(--color-ink)]">
 
                 APIFlow AI
 
               </h2>
 
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-[var(--color-ink-muted)]">
 
                 AI Workflow Platform
 
@@ -81,7 +80,7 @@ function Navbar() {
               <a
                 key={item.name}
                 href={item.href}
-                className="text-sm text-slate-300 transition hover:text-white"
+                className="text-sm text-[var(--color-ink-muted)] transition hover:text-[var(--color-ink)]"
               >
                 {item.name}
               </a>
@@ -96,7 +95,7 @@ function Navbar() {
 
             <Link to="/login">
 
-              <button className="text-slate-300 hover:text-white">
+              <button className="text-sm text-[var(--color-ink-muted)] transition hover:text-[var(--color-ink)]">
 
                 Login
 
@@ -106,7 +105,7 @@ function Navbar() {
 
             <Link to="/register">
 
-              <Button>
+              <Button size="sm">
 
                 Get Started
 
@@ -120,7 +119,7 @@ function Navbar() {
 
           <button
             onClick={() => setOpen(!open)}
-            className="text-white lg:hidden"
+            className="text-[var(--color-ink)] lg:hidden"
           >
             {open ? <X /> : <Menu />}
           </button>
@@ -132,7 +131,7 @@ function Navbar() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="border-t border-white/10 bg-zinc-950 lg:hidden"
+            className="border-t border-[var(--color-hairline)] bg-[var(--color-base)] lg:hidden"
           >
 
             <div className="flex flex-col p-6">
@@ -142,7 +141,7 @@ function Navbar() {
                 <a
                   key={item.name}
                   href={item.href}
-                  className="py-3 text-slate-300"
+                  className="py-3 text-[var(--color-ink-muted)]"
                 >
                   {item.name}
                 </a>
@@ -151,7 +150,7 @@ function Navbar() {
 
               <Link
                 to="/login"
-                className="mt-4"
+                className="mt-4 text-[var(--color-ink-muted)]"
               >
                 Login
               </Link>

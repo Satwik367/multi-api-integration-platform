@@ -217,7 +217,7 @@ function WorkflowBuilder() {
 
             </div>
 
-            <div className="rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-surface)] p-7">
+            <div className="rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-surface)] p-8">
 
                 <input
 
@@ -323,7 +323,7 @@ function WorkflowBuilder() {
 
             </div>
 
-            <div className="mt-10">
+            <div className="mt-14">
 
                 <h2 className="font-display text-2xl font-semibold text-[var(--color-ink)] mb-5">
 
@@ -355,7 +355,7 @@ function WorkflowBuilder() {
 
                             key={workflow._id}
 
-                            className="rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-surface)] p-7 mb-6"
+                            className="rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-surface)] p-8 mb-6"
 
                         >
 
@@ -435,7 +435,7 @@ function WorkflowBuilder() {
 
                 result &&
 
-                <div className="rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-surface)] p-7 mt-10">
+                <div className="rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-surface)] p-8 mt-14">
 
                     <h2 className="font-display text-2xl font-semibold text-[var(--color-ink)] mb-4">
 

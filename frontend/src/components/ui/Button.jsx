@@ -13,12 +13,22 @@ const variants = {
 
   danger:
     "bg-[var(--color-signal-coral)] hover:bg-[var(--color-signal-coral)]/90 text-white",
+
+  ghost:
+    "text-[var(--color-ink-muted)] hover:bg-white/[0.04] hover:text-[var(--color-ink)]",
+};
+
+const sizes = {
+  sm: "px-4 py-2 text-sm",
+  md: "px-6 py-3",
+  lg: "px-8 py-4 text-base",
 };
 
 function Button({
   children,
   className,
   variant = "primary",
+  size = "md",
   loading = false,
   disabled = false,
   ...props
@@ -29,7 +39,8 @@ function Button({
       whileTap={loading || disabled ? {} : { scale: 0.98 }}
       disabled={disabled || loading}
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 font-semibold transition disabled:cursor-not-allowed disabled:opacity-60",
+        "inline-flex items-center justify-center gap-2 rounded-xl font-semibold transition disabled:cursor-not-allowed disabled:opacity-60",
+        sizes[size],
         variants[variant],
         className
       )}

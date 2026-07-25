@@ -63,7 +63,7 @@ function Logs() {
 
     return (
 
-        <div className="space-y-8">
+        <div className="space-y-10">
 
             <div>
 
@@ -127,7 +127,7 @@ function Logs() {
 
                                     key={log._id}
 
-                                    className="rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-surface)] p-6 transition-colors hover:border-[var(--color-signal-indigo)]/30"
+                                    className="rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-surface)] p-7 transition-colors hover:border-[var(--color-signal-indigo)]/30"
 
                                 >
 

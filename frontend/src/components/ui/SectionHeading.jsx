@@ -6,7 +6,7 @@ function SectionHeading({
   description,
 }) {
   return (
-    <div className="mx-auto mb-16 max-w-3xl text-center">
+    <div className="mx-auto mb-20 max-w-3xl text-center">
 
       {badge && (
         <Badge>
@@ -14,11 +14,11 @@ function SectionHeading({
         </Badge>
       )}
 
-      <h2 className="mt-6 text-5xl font-bold text-white">
+      <h2 className="font-display mt-6 text-5xl font-bold text-[var(--color-ink)]">
         {title}
       </h2>
 
-      <p className="mt-6 text-lg leading-8 text-slate-400">
+      <p className="mt-6 text-lg leading-8 text-[var(--color-ink-muted)]">
         {description}
       </p>
 

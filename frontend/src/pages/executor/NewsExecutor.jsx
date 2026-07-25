@@ -99,7 +99,7 @@ function NewsExecutor() {
 
                                     key={index}
 
-                                    className="rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-surface)] p-6"
+                                    className="rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-surface)] p-7"
 
                                 >
 

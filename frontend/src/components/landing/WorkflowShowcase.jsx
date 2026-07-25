@@ -3,13 +3,13 @@ import {
   CloudSun,
   BrainCircuit,
   Newspaper,
-  Github,
   Workflow,
   CheckCircle2,
   Sparkles,
   ArrowRight,
   Activity,
 } from "lucide-react";
+import { FaGithub } from "react-icons/fa";
 
 import Card from "../ui/Card";
 import Badge from "../ui/Badge";
@@ -22,7 +22,7 @@ const nodes = [
     title: "Weather API",
     subtitle: "Input",
     icon: CloudSun,
-    color: "from-sky-500 to-cyan-400",
+    tone: "indigo",
     position: {
       top: "8%",
       left: "8%",
@@ -32,8 +32,8 @@ const nodes = [
     id: "github",
     title: "GitHub API",
     subtitle: "Repository",
-    icon: Github,
-    color: "from-slate-700 to-slate-500",
+    icon: FaGithub,
+    tone: "neutral",
     position: {
       top: "65%",
       left: "12%",
@@ -44,7 +44,7 @@ const nodes = [
     title: "Gemini AI",
     subtitle: "Process",
     icon: BrainCircuit,
-    color: "from-violet-500 to-indigo-500",
+    tone: "indigo",
     position: {
       top: "34%",
       left: "40%",
@@ -55,7 +55,7 @@ const nodes = [
     title: "News API",
     subtitle: "Articles",
     icon: Newspaper,
-    color: "from-emerald-500 to-green-400",
+    tone: "mint",
     position: {
       top: "12%",
       right: "10%",
@@ -66,7 +66,7 @@ const nodes = [
     title: "Workflow",
     subtitle: "Output",
     icon: Workflow,
-    color: "from-pink-500 to-rose-500",
+    tone: "mint",
     position: {
       bottom: "10%",
       right: "14%",
@@ -74,7 +74,13 @@ const nodes = [
   },
 ];
 
-function WorkflowNode({ icon: Icon, title, subtitle, color, style }) {
+const toneClasses = {
+  indigo: "bg-[var(--color-signal-indigo)]",
+  mint: "bg-[var(--color-signal-mint)]",
+  neutral: "bg-[var(--color-ink-faint)]",
+};
+
+function CanvasNode({ icon: Icon, title, subtitle, tone, style }) {
   return (
     <motion.div
       style={style}
@@ -95,62 +101,29 @@ function WorkflowNode({ icon: Icon, title, subtitle, color, style }) {
       }}
       className="absolute"
     >
-      <div
-        className="
-          group
-          relative
-          w-60
-          rounded-3xl
-          border
-          border-white/10
-          bg-slate-900/80
-          p-5
-          backdrop-blur-xl
-          shadow-2xl
-        "
-      >
+      <div className="group relative w-60 rounded-3xl border border-[var(--color-hairline)] bg-[var(--color-surface)] p-5 shadow-2xl">
         <div
-          className={`
-            absolute
-            inset-0
-            rounded-3xl
-            bg-gradient-to-r
-            ${color}
-            opacity-0
-            blur-2xl
-            transition
-            duration-300
-            group-hover:opacity-20
-          `}
+          className={`absolute inset-0 rounded-3xl ${toneClasses[tone]} opacity-0 blur-2xl transition duration-300 group-hover:opacity-15`}
         />
 
         <div className="relative flex items-center gap-4">
           <div
-            className={`
-              flex
-              h-14
-              w-14
-              items-center
-              justify-center
-              rounded-2xl
-              bg-gradient-to-r
-              ${color}
-            `}
+            className={`flex h-14 w-14 items-center justify-center rounded-2xl ${toneClasses[tone]}`}
           >
             <Icon className="h-7 w-7 text-white" />
           </div>
 
           <div>
-            <h4 className="font-semibold text-white">{title}</h4>
+            <h4 className="font-semibold text-[var(--color-ink)]">{title}</h4>
 
-            <p className="text-sm text-slate-400">{subtitle}</p>
+            <p className="text-sm text-[var(--color-ink-muted)]">{subtitle}</p>
           </div>
         </div>
 
         <div className="mt-5 flex items-center justify-between">
           <Badge variant="success">Connected</Badge>
 
-          <CheckCircle2 className="text-emerald-400" size={20} />
+          <CheckCircle2 className="text-[var(--color-signal-mint)]" size={20} />
         </div>
       </div>
     </motion.div>
@@ -159,14 +132,14 @@ function WorkflowNode({ icon: Icon, title, subtitle, color, style }) {
 
 export default function WorkflowShowcase() {
   return (
-    <section className="relative overflow-hidden py-32">
+    <section id="builder" className="relative overflow-hidden py-28">
       {/* Background Glow */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute left-20 top-20 h-80 w-80 rounded-full bg-indigo-500/20 blur-[120px]" />
-        <div className="absolute right-10 bottom-20 h-96 w-96 rounded-full bg-cyan-500/15 blur-[160px]" />
+        <div className="absolute left-20 top-20 h-80 w-80 rounded-full bg-[var(--color-signal-indigo)]/15 blur-[120px]" />
+        <div className="absolute right-10 bottom-20 h-96 w-96 rounded-full bg-[var(--color-signal-mint)]/10 blur-[160px]" />
       </div>
 
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
+      <div className="mx-auto max-w-6xl px-6 lg:px-10">
         <SectionHeading
           badge="Visual Workflow Builder"
           title="Build powerful AI workflows visually"
@@ -179,7 +152,7 @@ export default function WorkflowShowcase() {
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7 }}
-            className="relative h-[700px] overflow-hidden rounded-[32px] border border-white/10 bg-white/5 backdrop-blur-xl"
+            className="relative h-[700px] overflow-hidden rounded-[32px] border border-[var(--color-hairline)] bg-[var(--color-surface)]"
           >
             {/* Grid Background */}
             <div
@@ -203,7 +176,7 @@ export default function WorkflowShowcase() {
                 repeat: Infinity,
                 duration: 6,
               }}
-              className="absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo-500/20 blur-[100px]"
+              className="absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--color-signal-indigo)]/20 blur-[100px]"
             />
 
             {/* Animated Connection Lines */}
@@ -214,8 +187,8 @@ export default function WorkflowShowcase() {
             >
               <defs>
                 <linearGradient id="workflowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#6366F1" />
-                  <stop offset="100%" stopColor="#06B6D4" />
+                  <stop offset="0%" stopColor="#6c6bff" />
+                  <stop offset="100%" stopColor="#33e6b3" />
                 </linearGradient>
               </defs>
 
@@ -261,7 +234,7 @@ export default function WorkflowShowcase() {
             {Array.from({ length: 16 }).map((_, i) => (
               <motion.div
                 key={i}
-                className="absolute h-2 w-2 rounded-full bg-indigo-400/70"
+                className="absolute h-2 w-2 rounded-full bg-[var(--color-signal-indigo)]/70"
                 style={{
                   left: `${8 + Math.random() * 84}%`,
                   top: `${8 + Math.random() * 84}%`,
@@ -280,12 +253,12 @@ export default function WorkflowShowcase() {
 
             {/* Workflow Nodes */}
             {nodes.map((node) => (
-              <WorkflowNode
+              <CanvasNode
                 key={node.id}
                 icon={node.icon}
                 title={node.title}
                 subtitle={node.subtitle}
-                color={node.color}
+                tone={node.tone}
                 style={node.position}
               />
             ))}
@@ -299,9 +272,9 @@ export default function WorkflowShowcase() {
                 repeat: Infinity,
                 duration: 2,
               }}
-              className="absolute left-1/2 top-1/2 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-indigo-400/40 bg-indigo-500/20 backdrop-blur-xl"
+              className="absolute left-1/2 top-1/2 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[var(--color-signal-indigo)]/40 bg-[var(--color-signal-indigo)]/20 backdrop-blur-xl"
             >
-              <Sparkles className="text-indigo-300" size={34} />
+              <Sparkles className="text-[var(--color-signal-indigo)]" size={34} />
             </motion.div>
           </motion.div>
 
@@ -312,12 +285,12 @@ export default function WorkflowShowcase() {
             transition={{ duration: 0.7 }}
             className="space-y-6"
           >
-            <Card className="border border-white/10 bg-white/5 p-8 backdrop-blur-xl">
+            <Card>
               <Badge className="mb-5">Live Execution</Badge>
 
-              <h3 className="text-3xl font-bold text-white">AI Workflow Execution</h3>
+              <h3 className="font-display text-3xl font-bold text-[var(--color-ink)]">AI Workflow Execution</h3>
 
-              <p className="mt-4 leading-8 text-slate-400">
+              <p className="mt-4 leading-8 text-[var(--color-ink-muted)]">
                 Execute workflows that combine multiple APIs with Gemini AI.
                 Every node communicates seamlessly to generate intelligent
                 outputs in seconds.
@@ -338,11 +311,11 @@ export default function WorkflowShowcase() {
                     transition={{
                       delay: index * 0.12,
                     }}
-                    className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/5 p-4"
+                    className="flex items-center gap-4 rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-surface-raised)] p-4"
                   >
-                    <CheckCircle2 className="text-emerald-400" size={22} />
+                    <CheckCircle2 className="text-[var(--color-signal-mint)]" size={22} />
 
-                    <span className="text-slate-300">{step}</span>
+                    <span className="text-[var(--color-ink-muted)]">{step}</span>
                   </motion.div>
                 ))}
               </div>
@@ -375,21 +348,21 @@ export default function WorkflowShowcase() {
               ].map((item) => (
                 <Card
                   key={item.label}
-                  className="border border-white/10 bg-white/5 p-6 text-center backdrop-blur-xl"
+                  className="p-6 text-center"
                 >
-                  <h4 className="text-3xl font-bold text-white">{item.value}</h4>
+                  <h4 className="font-data text-3xl font-medium text-[var(--color-ink)]">{item.value}</h4>
 
-                  <p className="mt-2 text-sm text-slate-400">{item.label}</p>
+                  <p className="mt-2 text-sm text-[var(--color-ink-muted)]">{item.label}</p>
                 </Card>
               ))}
             </div>
 
             {/* Activity Feed */}
-            <Card className="border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
+            <Card>
               <div className="mb-5 flex items-center gap-3">
-                <Activity className="text-indigo-400" />
+                <Activity className="text-[var(--color-signal-indigo)]" />
 
-                <h4 className="font-semibold text-white">Recent Activity</h4>
+                <h4 className="font-semibold text-[var(--color-ink)]">Recent Activity</h4>
               </div>
 
               <div className="space-y-4">
@@ -409,11 +382,11 @@ export default function WorkflowShowcase() {
                 ].map((item) => (
                   <div
                     key={item.name}
-                    className="flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3"
+                    className="flex items-center justify-between rounded-xl border border-[var(--color-hairline)] bg-[var(--color-surface-raised)] px-4 py-3"
                   >
-                    <span className="text-slate-300">{item.name}</span>
+                    <span className="text-[var(--color-ink-muted)]">{item.name}</span>
 
-                    <Badge variant={item.status === "Running" ? "warning" : "success"}>
+                    <Badge variant={item.status === "Running" ? "primary" : "success"}>
                       {item.status}
                     </Badge>
                   </div>

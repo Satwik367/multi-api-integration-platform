@@ -91,7 +91,7 @@ function WeatherExecutor() {
 
                     <pre
 
-                        className="font-data mt-8 rounded-xl border border-[var(--color-hairline)] bg-[var(--color-surface)] p-6 text-sm text-[var(--color-signal-mint)] overflow-auto"
+                        className="font-data mt-8 rounded-xl border border-[var(--color-hairline)] bg-[var(--color-surface)] p-7 text-sm text-[var(--color-signal-mint)] overflow-auto"
 
                     >
 

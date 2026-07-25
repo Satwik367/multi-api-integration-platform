@@ -88,7 +88,7 @@ function CurrencyExecutor() {
 
                 result && (
 
-                    <div className="mt-8 rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-surface)] p-6 max-w-sm">
+                    <div className="mt-8 rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-surface)] p-7 max-w-sm">
 
                         <h2 className="font-data text-3xl font-medium tabular-data text-[var(--color-ink)]">
 
