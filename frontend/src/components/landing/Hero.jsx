@@ -90,22 +90,6 @@ export default function Hero() {
             </Button>
           </div>
 
-          <div className="mt-5 flex items-center gap-4 text-sm text-[var(--color-ink-muted)]">
-            <div className="flex -space-x-3">
-              {[1, 2, 3, 4].map((i) => (
-                <div
-                  key={i}
-                  className="h-10 w-10 rounded-full border-2 border-[var(--color-base)] bg-[var(--color-signal-indigo)]"
-                />
-              ))}
-            </div>
-
-            <span>
-              Trusted by <span className="font-data font-medium text-[var(--color-ink)]">2,000+</span>{" "}
-              developers worldwide
-            </span>
-          </div>
-
           <div className="mt-12 grid max-w-xl grid-cols-2 gap-5">
             {[
               { icon: Zap, title: "Lightning Fast" },

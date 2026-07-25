@@ -18,7 +18,6 @@ const platformLinks = [
 const resourceLinks = [
   { name: "Features", href: "#features" },
   { name: "How It Works", href: "#workflow" },
-  { name: "Testimonials", href: "#testimonials" },
   { name: "Sign In", to: "/login" },
 ];
 

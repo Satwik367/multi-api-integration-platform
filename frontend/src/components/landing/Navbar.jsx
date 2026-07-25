@@ -8,7 +8,6 @@ import Button from "../ui/Button";
 const navLinks = [
   { name: "Features", href: "#features" },
   { name: "How It Works", href: "#workflow" },
-  { name: "Testimonials", href: "#testimonials" },
 ];
 
 function Navbar() {

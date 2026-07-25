@@ -330,16 +330,8 @@ export default function WorkflowShowcase() {
             <div className="grid grid-cols-2 gap-5">
               {[
                 {
-                  value: "20+",
-                  label: "Supported APIs",
-                },
-                {
-                  value: "99.9%",
-                  label: "Success Rate",
-                },
-                {
-                  value: "500ms",
-                  label: "Avg Response",
+                  value: "5",
+                  label: "Connected APIs",
                 },
                 {
                   value: "24/7",

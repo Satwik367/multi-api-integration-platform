@@ -3,7 +3,6 @@ import Hero from "../components/landing/Hero";
 import Features from "../components/landing/Features";
 import HowItWorks from "../components/landing/HowItWorks";
 import WorkflowShowcase from "../components/landing/WorkflowShowcase";
-import Testimonials from "../components/landing/Testimonials";
 import CTA from "../components/landing/CTA";
 import Footer from "../components/landing/Footer";
 
@@ -17,7 +16,6 @@ function Home() {
         <Features />
         <HowItWorks />
         <WorkflowShowcase />
-        <Testimonials />
         <CTA />
       </div>
 
