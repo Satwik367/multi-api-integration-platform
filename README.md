@@ -10,16 +10,14 @@ A full-stack MERN application that lets a user log in once and drive multiple th
 
 ## 📸 Screenshots
 
-> Drop your PNG/JPG exports into a `screenshots/` folder at the project root with these filenames, and they'll render automatically here and on GitHub.
-
-| | |
-|---|---|
-| **Landing Page** ![Landing Page](screenshots/landing-page.png) | **Login / Register** ![Auth](screenshots/auth.png) |
-| **Dashboard** ![Dashboard](screenshots/dashboard.png) | **API Marketplace** ![Marketplace](screenshots/marketplace.png) |
-| **Weather Executor** ![Weather](screenshots/weather-executor.png) | **GitHub Lookup** ![GitHub](screenshots/github-executor.png) |
-| **News Executor** ![News](screenshots/news-executor.png) | **Currency Converter** ![Currency](screenshots/currency-executor.png) |
-| **Gemini AI Chat** ![Gemini](screenshots/gemini-executor.png) | **Workflow Builder** ![Workflow](screenshots/workflow-builder.png) |
-| **Execution Logs** ![Logs](screenshots/logs.png) | **Profile** ![Profile](screenshots/profile.png) |
+|                                                                   |                                                                       |
+| ----------------------------------------------------------------- | --------------------------------------------------------------------- |
+| **Landing Page** ![Landing Page](screenshots/landing-page.png)    | **Login / Register** ![Auth](screenshots/auth.png)                    |
+| **Dashboard** ![Dashboard](screenshots/dashboard.png)             | **API Marketplace** ![Marketplace](screenshots/marketplace.png)       |
+| **Weather Executor** ![Weather](screenshots/weather-executor.png) | **GitHub Lookup** ![GitHub](screenshots/github-executor.png)          |
+| **News Executor** ![News](screenshots/news-executor.png)          | **Currency Converter** ![Currency](screenshots/currency-executor.png) |
+| **Gemini AI Chat** ![Gemini](screenshots/gemini-executor.png)     | **Workflow Builder** ![Workflow](screenshots/workflow-builder.png)    |
+| **Execution Logs** ![Logs](screenshots/logs.png)                  | **Profile** ![Profile](screenshots/profile.png)                       |
 
 <sub>Tip: on Windows/Mac use Snipping Tool / ⌘+Shift+4 against the live demo link above at 1440×900 for consistent, clean captures.</sub>
 
@@ -43,6 +41,7 @@ A full-stack MERN application that lets a user log in once and drive multiple th
 ## 🖥 Tech Stack
 
 **Frontend**
+
 - React 19 + Vite
 - React Router DOM v7
 - TanStack Query, React Hook Form + Zod
@@ -50,6 +49,7 @@ A full-stack MERN application that lets a user log in once and drive multiple th
 - Axios, react-hot-toast / sonner, lucide-react / react-icons
 
 **Backend**
+
 - Node.js + Express 5
 - MongoDB Atlas + Mongoose
 - JWT (jsonwebtoken) + bcryptjs
@@ -57,6 +57,7 @@ A full-stack MERN application that lets a user log in once and drive multiple th
 - Axios for outbound third-party API calls
 
 **External APIs**
+
 - OpenWeather API
 - NewsAPI
 - Exchange Rate API
@@ -64,6 +65,7 @@ A full-stack MERN application that lets a user log in once and drive multiple th
 - Google Gemini API
 
 **Deployment**
+
 - Frontend → Vercel
 - Backend → Render
 - Database → MongoDB Atlas
@@ -111,18 +113,21 @@ multi-api-integration-platform/
 ## 🚀 Getting Started
 
 ### Clone Repository
+
 ```bash
 git clone https://github.com/Satwik367/multi-api-integration-platform.git
 cd multi-api-integration-platform
 ```
 
 ### Backend Setup
+
 ```bash
 cd backend
 npm install
 ```
 
 Create a `.env` file in `backend/`:
+
 ```env
 PORT=5000
 MONGO_URI=YOUR_MONGODB_URI
@@ -133,22 +138,26 @@ GEMINI_API_KEY=YOUR_KEY
 ```
 
 Run:
+
 ```bash
 npm run dev
 ```
 
 ### Frontend Setup
+
 ```bash
 cd frontend
 npm install
 ```
 
 Create a `.env` file in `frontend/`:
+
 ```env
 VITE_API_URL=http://localhost:5000/api
 ```
 
 Run:
+
 ```bash
 npm run dev
 ```
@@ -160,6 +169,7 @@ npm run dev
 All routes below (except register/login) require a `Bearer` JWT from `/api/auth/login`, sent via `Authorization: Bearer <token>`.
 
 ### Authentication
+
 ```
 POST /api/auth/register     Create a new account
 POST /api/auth/login        Log in, returns JWT
@@ -167,6 +177,7 @@ GET  /api/auth/me           Get current authenticated user
 ```
 
 ### Core API Integrations
+
 ```
 GET  /api/weather           Get current weather for a city
 GET  /api/news              Search news articles by query
@@ -176,6 +187,7 @@ POST /api/gemini            Chat with Google Gemini
 ```
 
 ### Workflows
+
 ```
 GET    /api/workflows       List all workflows for the logged-in user
 POST   /api/workflows       Create a new workflow (name + ordered steps)
@@ -184,6 +196,7 @@ DELETE /api/workflows/:id   Delete a workflow
 ```
 
 ### Logs, Dashboard & Profile
+
 ```
 GET  /api/logs              Get this user's execution history (API + workflow calls)
 GET  /api/dashboard          Get aggregated stats for the dashboard
