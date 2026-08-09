@@ -2,6 +2,39 @@ import { useState } from "react";
 import { convertCurrency } from "../../services/currencyService";
 import Button from "../../components/ui/Button";
 
+const CURRENCIES = [
+    { code: "AED", name: "UAE Dirham" },
+    { code: "AUD", name: "Australian Dollar" },
+    { code: "BRL", name: "Brazilian Real" },
+    { code: "CAD", name: "Canadian Dollar" },
+    { code: "CHF", name: "Swiss Franc" },
+    { code: "CNY", name: "Chinese Yuan" },
+    { code: "DKK", name: "Danish Krone" },
+    { code: "EGP", name: "Egyptian Pound" },
+    { code: "EUR", name: "Euro" },
+    { code: "GBP", name: "British Pound" },
+    { code: "HKD", name: "Hong Kong Dollar" },
+    { code: "IDR", name: "Indonesian Rupiah" },
+    { code: "INR", name: "Indian Rupee" },
+    { code: "JPY", name: "Japanese Yen" },
+    { code: "KRW", name: "South Korean Won" },
+    { code: "MXN", name: "Mexican Peso" },
+    { code: "MYR", name: "Malaysian Ringgit" },
+    { code: "NGN", name: "Nigerian Naira" },
+    { code: "NOK", name: "Norwegian Krone" },
+    { code: "NZD", name: "New Zealand Dollar" },
+    { code: "PHP", name: "Philippine Peso" },
+    { code: "PLN", name: "Polish Zloty" },
+    { code: "RUB", name: "Russian Ruble" },
+    { code: "SAR", name: "Saudi Riyal" },
+    { code: "SEK", name: "Swedish Krona" },
+    { code: "SGD", name: "Singapore Dollar" },
+    { code: "THB", name: "Thai Baht" },
+    { code: "TRY", name: "Turkish Lira" },
+    { code: "USD", name: "US Dollar" },
+    { code: "ZAR", name: "South African Rand" },
+];
+
 function CurrencyExecutor() {
 
     const [from, setFrom] = useState("USD");
@@ -56,17 +89,45 @@ function CurrencyExecutor() {
 
             <div className="flex flex-wrap gap-4">
 
-                <input
-                    className={`${inputClasses} w-28`}
+                <select
+                    className={`${inputClasses} w-48`}
                     value={from}
                     onChange={(e)=>setFrom(e.target.value)}
-                />
+                >
 
-                <input
-                    className={`${inputClasses} w-28`}
+                    {
+
+                        CURRENCIES.map((currency) => (
+
+                            <option key={currency.code} value={currency.code}>
+                                {currency.code} — {currency.name}
+                            </option>
+
+                        ))
+
+                    }
+
+                </select>
+
+                <select
+                    className={`${inputClasses} w-48`}
                     value={to}
                     onChange={(e)=>setTo(e.target.value)}
-                />
+                >
+
+                    {
+
+                        CURRENCIES.map((currency) => (
+
+                            <option key={currency.code} value={currency.code}>
+                                {currency.code} — {currency.name}
+                            </option>
+
+                        ))
+
+                    }
+
+                </select>
 
                 <input
                     className={`${inputClasses} w-32`}
