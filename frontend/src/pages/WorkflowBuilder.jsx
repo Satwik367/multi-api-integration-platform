@@ -83,9 +83,58 @@ function WorkflowBuilder() {
 
         const temp = [...steps];
 
-        temp[index].api = value;
+        temp[index] = {
+
+            ...temp[index],
+
+            api: value,
+
+            config: {}
+
+        };
 
         setSteps(temp);
+
+    };
+
+    const updateStepConfig = (index, key, value) => {
+
+        const temp = [...steps];
+
+        temp[index] = {
+
+            ...temp[index],
+
+            config: {
+
+                ...temp[index].config,
+
+                [key]: value
+
+            }
+
+        };
+
+        setSteps(temp);
+
+    };
+
+    const configField = {
+
+        Weather: {
+            key: "city",
+            placeholder: "e.g. London"
+        },
+
+        GitHub: {
+            key: "username",
+            placeholder: "e.g. torvalds"
+        },
+
+        News: {
+            key: "query",
+            placeholder: "e.g. artificial intelligence"
+        }
 
     };
 
@@ -251,39 +300,77 @@ function WorkflowBuilder() {
 
                         steps.map((step,index)=>(
 
-                            <select
+                            <div key={index}>
 
-                                key={index}
+                                <select
 
-                                className={inputClasses}
+                                    className={inputClasses}
 
-                                value={step.api}
+                                    value={step.api}
 
-                                onChange={(e)=>updateStep(index,e.target.value)}
+                                    onChange={(e)=>updateStep(index,e.target.value)}
 
-                            >
+                                >
+
+                                    {
+
+                                        apiOptions.map((api)=>(
+
+                                            <option
+
+                                                key={api}
+
+                                                value={api}
+
+                                            >
+
+                                                {api}
+
+                                            </option>
+
+                                        ))
+
+                                    }
+
+                                </select>
 
                                 {
 
-                                    apiOptions.map((api)=>(
+                                    configField[step.api]
 
-                                        <option
+                                    ?
 
-                                            key={api}
+                                    (
 
-                                            value={api}
+                                        <input
 
-                                        >
+                                            className={`${inputClasses} mt-2`}
 
-                                            {api}
+                                            placeholder={configField[step.api].placeholder}
 
-                                        </option>
+                                            value={step.config?.[configField[step.api].key] || ""}
 
-                                    ))
+                                            onChange={(e)=>updateStepConfig(index,configField[step.api].key,e.target.value)}
+
+                                        />
+
+                                    )
+
+                                    :
+
+                                    (
+
+                                        <p className="mt-2 text-sm text-[var(--color-ink-faint)]">
+
+                                            Uses the previous step's output
+
+                                        </p>
+
+                                    )
 
                                 }
 
-                            </select>
+                            </div>
 
                         ))
 
@@ -375,21 +462,29 @@ function WorkflowBuilder() {
 
                                 {
 
-                                    workflow.steps.map((step,index)=>(
+                                    workflow.steps.map((step,index)=>{
 
-                                        <span
+                                        const field = configField[step.api];
 
-                                            key={index}
+                                        const configValue = field && step.config?.[field.key];
 
-                                            className="rounded-full bg-[var(--color-signal-indigo-soft)] text-[var(--color-signal-indigo)] px-4 py-1.5 text-sm font-medium"
+                                        return (
 
-                                        >
+                                            <span
 
-                                            {step.api}
+                                                key={index}
 
-                                        </span>
+                                                className="rounded-full bg-[var(--color-signal-indigo-soft)] text-[var(--color-signal-indigo)] px-4 py-1.5 text-sm font-medium"
 
-                                    ))
+                                            >
+
+                                                {configValue ? `${step.api}: ${configValue}` : step.api}
+
+                                            </span>
+
+                                        );
+
+                                    })
 
                                 }
 
