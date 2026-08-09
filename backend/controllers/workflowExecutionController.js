@@ -7,6 +7,50 @@ const ai = new GoogleGenAI({
     apiKey: process.env.GEMINI_API_KEY
 });
 
+// Builds a prompt for the Gemini step that matches whatever API ran
+// immediately before it, so the response is a plain-language summary
+// aimed at the end user — not a technical review of the JSON shape.
+const buildGeminiPrompt = (lastApi, currentOutput) => {
+
+    const instructions = {
+
+        Weather:
+            "You are summarizing live weather data for someone who just wants " +
+            "to know what it's like outside. Write a short, natural, friendly " +
+            "2-4 sentence summary (temperature, how it feels, general " +
+            "conditions). Do not describe the JSON structure, field names, or " +
+            "suggest API design improvements.",
+
+        GitHub:
+            "You are summarizing a GitHub user's public profile for someone " +
+            "curious about them. Write a short, natural 2-4 sentence summary " +
+            "highlighting who they are and notable stats (followers, public " +
+            "repos, bio, company). Do not describe the JSON structure or " +
+            "field names.",
+
+        News:
+            "You are summarizing a list of news articles for someone who " +
+            "wants the highlights, not a data dump. Write a short digest " +
+            "(3-5 bullet points or sentences) covering the most relevant " +
+            "headlines and what they're about. Do not describe the JSON " +
+            "structure or field names.",
+
+        Gemini:
+            "Continue the conversation naturally based on the previous " +
+            "response below."
+
+    };
+
+    const instruction = instructions[lastApi] ||
+        "You are a helpful assistant. Respond naturally and clearly.";
+
+    if (!currentOutput) {
+        return "Introduce yourself briefly and explain you're ready to help.";
+    }
+
+    return `${instruction}\n\nRaw data:\n${currentOutput}`;
+};
+
 const runWorkflow = async (req, res) => {
 
     try {
@@ -26,6 +70,8 @@ const runWorkflow = async (req, res) => {
         }
 
         let currentOutput = "";
+
+        let lastApi = null;
 
         for (const step of workflow.steps) {
 
@@ -77,6 +123,8 @@ const runWorkflow = async (req, res) => {
 
                         );
 
+                        lastApi = "Weather";
+
                         break;
 
                     }
@@ -102,6 +150,8 @@ const runWorkflow = async (req, res) => {
                             2
 
                         );
+
+                        lastApi = "GitHub";
 
                         break;
 
@@ -143,6 +193,8 @@ const runWorkflow = async (req, res) => {
 
                         );
 
+                        lastApi = "News";
+
                         break;
 
                     }
@@ -155,11 +207,13 @@ const runWorkflow = async (req, res) => {
 
                             model: "gemini-flash-latest",
 
-                            contents: `Analyze the following API output:\n\n${currentOutput}`
+                            contents: buildGeminiPrompt(lastApi, currentOutput)
 
                         });
 
                         currentOutput = geminiResponse.text;
+
+                        lastApi = "Gemini";
 
                         break;
 
