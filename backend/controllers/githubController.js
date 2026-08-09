@@ -22,7 +22,15 @@ const getGithubUser = async (req, res) => {
 
         const response = await axios.get(
 
-            `https://api.github.com/users/${username}`
+            `https://api.github.com/users/${username}`,
+
+            {
+
+                headers: process.env.GITHUB_TOKEN
+                    ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` }
+                    : {}
+
+            }
 
         );
 
