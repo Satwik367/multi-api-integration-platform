@@ -7,6 +7,11 @@ const workflowSchema = new mongoose.Schema({
         required: true
     },
 
+    description: {
+        type: String,
+        default: ""
+    },
+
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
@@ -15,7 +20,14 @@ const workflowSchema = new mongoose.Schema({
     steps: [
 
         {
-            type: String
+            api: {
+                type: String,
+                required: true
+            },
+            config: {
+                type: Object,
+                default: {}
+            }
         }
 
     ]
