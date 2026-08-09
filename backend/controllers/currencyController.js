@@ -4,9 +4,25 @@ const createApiLog = require("../utils/createApiLog");
 
 const convertCurrency = async (req, res) => {
 
+    const { from, to, amount } = req.query;
+
     try {
 
-        const { from, to, amount } = req.query;
+        if (!from || !to || !amount) {
+
+            throw new Error(
+                "Missing required query params: 'from', 'to' and 'amount' are all required"
+            );
+
+        }
+
+        if (isNaN(Number(amount)) || Number(amount) <= 0) {
+
+            throw new Error(
+                `Invalid amount: "${amount}" is not a positive number`
+            );
+
+        }
 
         const response = await axios.get(
 
@@ -14,7 +30,23 @@ const convertCurrency = async (req, res) => {
 
         );
 
-        const rate = response.data.rates[to.toUpperCase()];
+        if (response.data.result === "error") {
+
+            throw new Error(
+                `Exchange rate provider error: ${response.data["error-type"] || "unknown"}`
+            );
+
+        }
+
+        const rate = response.data.rates?.[to.toUpperCase()];
+
+        if (!rate) {
+
+            throw new Error(
+                `Unsupported currency code: "${to.toUpperCase()}" was not found in the exchange rate data`
+            );
+
+        }
 
         const conversion = {
 
@@ -56,6 +88,22 @@ const convertCurrency = async (req, res) => {
 
     catch (err) {
 
+        // Prefer the most specific message available: our own thrown
+        // errors, then whatever the upstream API returned, then axios's
+        // own message. Never fall back to an empty string, or the log
+        // becomes undiagnosable.
+        const errorMessage =
+            err.message ||
+            err.response?.data?.["error-type"] ||
+            err.response?.data?.message ||
+            err.code ||
+            "Unknown error occurred while converting currency";
+
+        // Forward the upstream API's status if it gave one, use 502 for
+        // network-level failures (upstream unreachable/timed out), and
+        // 400 for our own input-validation errors.
+        const statusCode = err.response?.status || (err.code ? 502 : 400);
+
         await createApiLog(
 
             req,
@@ -66,15 +114,15 @@ const convertCurrency = async (req, res) => {
 
             req.query,
 
-            { error: err.message }
+            { error: errorMessage }
 
         );
 
-        res.status(500).json({
+        res.status(statusCode).json({
 
             success: false,
 
-            message: err.message
+            message: errorMessage
 
         });
 
