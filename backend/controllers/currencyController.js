@@ -24,11 +24,41 @@ const convertCurrency = async (req, res) => {
 
         }
 
-        const response = await axios.get(
+        // Free third-party APIs occasionally have transient network hiccups
+        // between cloud hosts. Give it a fast, bounded timeout, and retry
+        // once before treating it as a real failure.
+        const fetchRates = async () => {
 
-            `https://open.er-api.com/v6/latest/${from.toUpperCase()}`
+            return axios.get(
 
-        );
+                `https://open.er-api.com/v6/latest/${from.toUpperCase()}`,
+
+                { timeout: 8000 }
+
+            );
+
+        };
+
+        let response;
+
+        try {
+
+            response = await fetchRates();
+
+        } catch (firstErr) {
+
+            const isTransient =
+                firstErr.code === "ETIMEDOUT" ||
+                firstErr.code === "ECONNABORTED" ||
+                firstErr.code === "ECONNRESET";
+
+            if (!isTransient) {
+                throw firstErr;
+            }
+
+            response = await fetchRates();
+
+        }
 
         if (response.data.result === "error") {
 
@@ -88,10 +118,6 @@ const convertCurrency = async (req, res) => {
 
     catch (err) {
 
-        // Prefer the most specific message available: our own thrown
-        // errors, then whatever the upstream API returned, then axios's
-        // own message. Never fall back to an empty string, or the log
-        // becomes undiagnosable.
         const errorMessage =
             err.message ||
             err.response?.data?.["error-type"] ||
@@ -99,9 +125,6 @@ const convertCurrency = async (req, res) => {
             err.code ||
             "Unknown error occurred while converting currency";
 
-        // Forward the upstream API's status if it gave one, use 502 for
-        // network-level failures (upstream unreachable/timed out), and
-        // 400 for our own input-validation errors.
         const statusCode = err.response?.status || (err.code ? 502 : 400);
 
         await createApiLog(
